@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -11,12 +13,28 @@
   --preto-fosco: #212529;
 }
 
+/* cores de texto */
 .text-laranja-um {
   color: var(--laranja-um);
 }
-
 .text-laranja-dois {
   color: var(--laranja-dois);
+}
+.text-branco {
+  color: white;
+}
+
+/* tamanhos de texto */
+.text-um {
+  font-size: 1.2rem;
+}
+.text-dois {
+  font-size: 1.5rem;
+}
+
+/* grossuras */
+.weigth-semibold {
+  font-weight: 500;
 }
 
 .btn-laranja-um {
