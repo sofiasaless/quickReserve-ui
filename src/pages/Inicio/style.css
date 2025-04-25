@@ -1,0 +1,12 @@
+.container-capa {
+  background-image: url(../../assets/material/savory-mexican-food-composition.jpg);
+  height: 40vh;
+  background-size: cover;
+  background-position: initial;
+}
+
+.conteudo-capa {
+  background-color: #21252994;
+  width: 100%;
+  height: 100%;
+}

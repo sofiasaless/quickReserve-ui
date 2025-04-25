@@ -1,0 +1,5 @@
+.vertical-break {
+  background-color: var(--laranja-um);
+  height: 50px;
+  width: 3px;
+}
