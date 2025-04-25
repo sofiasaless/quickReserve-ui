@@ -3,6 +3,9 @@ import './style.css'
 // componentes
 import Navbar from "../../components/Navbar/Navbar"
 import BarraPesquisa from '../../components/BarraPesquisa/BarraPesquisa'
+import Container from '../../components/Container/Container'
+import Titulos from '../../components/Titulos/Titulos'
+import CardRestaurante from '../../components/CardRestaurante/CardRestaurante'
 
 const Inicio = () => {
 
@@ -23,6 +26,33 @@ const Inicio = () => {
           </div>
         </div>
       </section>
+      <Container>
+        <Titulos titulo='Restaurantes' subtitulo='Uma diversidade culinária para você' />
+
+        <div className="container">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            <div className="col">
+              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
+            </div>
+            <div className="col">
+              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
+            </div>
+            <div className="col">
+              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
+            </div>
+            <div className="col">
+              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
+            </div>
+            <div className="col">
+              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
+            </div>
+            <div className="col">
+              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
+            </div>
+          </div>
+        </div>
+
+      </Container>
     </>
   )
 }

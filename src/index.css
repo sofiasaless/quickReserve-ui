@@ -48,3 +48,16 @@
 .btn-laranja-um:hover {
   background-color: var(--laranja-dois);
 }
+
+.btn-outline-laranja-um {
+  background-color: transparent;
+  color: var(--laranja-dois);
+  border-radius: 50px;
+  border: 2px solid var(--laranja-um);
+  cursor: pointer;
+}
+.btn-outline-laranja-um:hover {
+  background-color: var(--laranja-dois);
+  border: none;
+  color: white;
+}

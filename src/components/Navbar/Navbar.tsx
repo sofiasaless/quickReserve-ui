@@ -11,7 +11,7 @@ interface NavbarProps {
 const Navbar: FunctionComponent<NavbarProps> = () => {
 
   return (
-    <nav id='navbar-items' className="navbar navbar-expand-lg navbar-light bg-light py-2">
+    <nav id='navbar-items' className="navbar navbar-expand-lg navbar-light bg-light py-2 sticky-top">
       <div className="container d-flex align-items-center justify-content-between">
 
         <div>
