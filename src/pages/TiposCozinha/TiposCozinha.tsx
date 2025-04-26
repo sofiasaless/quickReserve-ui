@@ -11,7 +11,6 @@ const TiposCozinha = () => {
 
   return (
     <>
-      <Navbar />
       <section className='container-capa'>
         <div className='conteudo-capa d-flex align-items-center justify-content-center flex-column text-center'>
           <div className='container'>
