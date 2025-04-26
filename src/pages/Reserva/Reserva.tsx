@@ -5,12 +5,14 @@ import imgInfoTemplate1 from '../../assets/material/store.png'
 import imgInfoTemplate2 from '../../assets/material/clock.png'
 import imgInfoTemplate3 from '../../assets/material/contact-mail.png'
 import imgInfoTemplate4 from '../../assets/material/reservationLogo.png'
+import imgIconeInfo from '../../assets/material/calendar.png'
 
 // components
 import CardRestauranteInfos from '../../components/CardRestauranteInfos/CardRestauranteInfos'
 
 import './style.css'
 import CardMesa from '../../components/CardMesa/CardMesa'
+import ModalAlerta from '../../components/ModalAlerta/ModalAlerta'
 
 const Reserva = () => {
   return (
@@ -27,7 +29,7 @@ const Reserva = () => {
         </div>
       </section>
 
-      <section className='container-informacoes container p-5 rounded-top-4 d-flex gap-4'>
+      <section className='container-informacoes container p-5 rounded-top-4 d-flex gap-4 responsivo'>
         {/* informações padroes do estabelecimento */}
         <div className='d-flex flex-column gap-4 conteudo'>
           <div className='d-flex gap-3 align-items-center mb-5'>
@@ -76,8 +78,7 @@ const Reserva = () => {
           />
 
           <div className='d-flex gap-3'>
-            <button className='btn-outline px-4 py-2'>Escolher horário</button>
-            <button className='btn-outline px-4 py-2'>Escolher data</button>
+            <button className='btn-outline px-4 py-2'>Escolher data e horário</button>
           </div>
 
 
@@ -117,11 +118,50 @@ const Reserva = () => {
             </div>
           </div>
 
-          <form>
+          <div>
+            <span className='text-um text-uppercase fst-italic'>Mesa de n° <strong>10</strong> selecionada</span>
+
+            <div className='d-flex gap-2 align-items-center'>
+              <img
+                src={imgIconeInfo} alt=""
+                style={{
+                  width: '25px',
+                  objectFit: 'cover'
+                }}
+              />
+              <span>Reserva para 08 de fevereiro de 2025, quinta-feira</span>
+            </div>
+          </div>
+
+          <form className='d-flex flex-column gap-3'>
+
+            <div className='d-flex flex-column gap-1'>
+              <label className='ms-2'>Nome completo</label>
+              <input type="text" className='input-reserva' />
+            </div>
+
+            <div className='d-flex flex-column gap-1'>
+              <label className='ms-2'>N° de pessoas</label>
+              <input type="number" className='input-reserva' />
+            </div>
+
+            <div className='d-flex flex-column gap-1'>
+              <label className='ms-2'>Observações</label>
+              <textarea rows={3} className='input-reserva' />
+            </div>
 
           </form>
+
+          <div className='d-flex justify-content-end mt-3'>
+            <button className='w-full btn-laranja-dois'>Solicitar reserva</button>
+          </div>
         </div>
       </section>
+
+      <ModalAlerta 
+        titulo='Reserva solicitada!'
+        informacao='Acompanhe o andamento da sua reserva na seção “Minhas reservas” disponível no seu perfil.'
+      />
 
     </section>
   )
