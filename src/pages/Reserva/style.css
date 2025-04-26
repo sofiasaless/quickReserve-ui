@@ -1,0 +1,16 @@
+.container-reserva {
+  background-color: var(--laranja-um-transparent);
+  min-height: 100vh;
+  max-height: 100%;
+}
+
+.container-informacoes {
+  background-color: white;
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+.conteudo {
+  width: 50%;
+}

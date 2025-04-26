@@ -1,0 +1,33 @@
+// assets
+import imgMesa from '../../assets/material/meeting-room.png'
+
+import './style.css'
+import { FunctionComponent } from "react";
+
+interface CardMesaProps {
+  numeroMesa: number;
+  disponibilidade: boolean;
+  lugares: number;
+}
+
+const CardMesa:FunctionComponent<CardMesaProps> = ({numeroMesa, disponibilidade, lugares}) => {
+  return (
+    <div className='card-mesa p-2 rounded-2 d-flex flex-column justify-content-center align-items-center'>
+      <h4 className='m-0'>{numeroMesa}</h4>
+      <img src={imgMesa} 
+        style={{
+          width: '80px',
+          objectFit: 'cover'
+        }}
+        className='mb-2'
+      />
+      <span>{lugares} lugares</span>
+      <div className='d-flex align-items-center gap-2'>
+        <div style={{backgroundColor: 'var(--verde)'}} className='disp-div rounded-circle' />
+        <span>Disponível</span>
+      </div>
+    </div>
+  )
+}
+
+export default CardMesa

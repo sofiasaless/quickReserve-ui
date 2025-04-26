@@ -1,7 +1,6 @@
 import './style.css'
 
 // componentes
-import Navbar from "../../components/Navbar/Navbar"
 import BarraPesquisa from '../../components/BarraPesquisa/BarraPesquisa'
 import Container from '../../components/Container/Container'
 import Titulos from '../../components/Titulos/Titulos'
