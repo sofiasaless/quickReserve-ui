@@ -1,7 +1,6 @@
 import './style.css'
 
 // componentes
-import Navbar from "../../components/Navbar/Navbar"
 import BarraPesquisa from '../../components/BarraPesquisa/BarraPesquisa'
 import Container from '../../components/Container/Container'
 import Titulos from '../../components/Titulos/Titulos'
@@ -11,7 +10,6 @@ const TiposCozinha = () => {
 
   return (
     <>
-      <Navbar />
       <section className='container-capa'>
         <div className='conteudo-capa d-flex align-items-center justify-content-center flex-column text-center'>
           <div className='container'>

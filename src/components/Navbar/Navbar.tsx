@@ -1,6 +1,11 @@
-import { FunctionComponent } from 'react';
-import Logo from '../Logo/Logo';
 import './style.css';
+import usuarioLogado from '../../assets/material/user.png'
+import restauranteLogado from '../../assets/material/restaurant.png'
+
+import { FunctionComponent } from 'react';
+
+// components
+import Logo from '../Logo/Logo';
 
 interface NavbarProps {
   user?: boolean;
@@ -26,6 +31,8 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
 
           <div className='vertical-break rounded-4'></div>
           <button className='btn-laranja-um px-5'>Entrar</button>
+          {/* <img src={usuarioLogado} className='img-logo-usuarios' alt="" /> */}
+          {/* <img src={restauranteLogado} className='img-logo-usuarios' alt="" /> */}
         </div>
 
       </div>

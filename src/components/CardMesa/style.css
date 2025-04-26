@@ -1,0 +1,9 @@
+.disp-div {
+  width: 10px;
+  height: 10px;
+}
+
+.card-mesa:hover {
+  background-color: #cccccc4d;
+  cursor: pointer;
+}

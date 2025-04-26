@@ -3,3 +3,10 @@
   height: 50px;
   width: 3px;
 }
+
+.img-logo-usuarios {
+  width: 100%;
+  height: auto;
+  max-width: 50px;
+  margin: 0 auto;
+}
