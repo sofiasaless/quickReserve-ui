@@ -14,8 +14,11 @@
   --laranja-dois-transparent: #cc9a067c;
   --preto-fosco: #212529;
   --vermelho: #e35d6a;
+  --vermelho-escuro: #ac4751;
   --azul: #6ea8fe;
   --verde: #75b798;
+  --verde-escuro: #578b73;
+  --cinza: #e8e8e8;
 }
 
 /* cores de texto */
@@ -88,6 +91,30 @@
   color: white;
 }
 
+.btn-verde {
+  background-color: var(--verde);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-verde:hover {
+  background-color: var(--verde-escuro);
+}
+
+.btn-vermelho {
+  background-color: var(--vermelho);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-vermelho:hover {
+  background-color: var(--vermelho-escuro);
+}
+
 .btn-outline {
   background-color: transparent;
   color: var(--preto-fosco);
@@ -111,6 +138,19 @@
 .input-reserva:focus {
   outline: none;
   border: 2px solid var(--laranja-um);
+}
+
+.input-padrao {
+  background: transparent;
+  color: var(--preto-fosco);
+  border-radius: 10px;
+  border: 2px solid var(--preto-fosco);
+  padding: 8px;
+  width: 100%;
+}
+.input-padrao:focus {
+  outline: none;
+  border: 2px solid var(--preto-fosco);
 }
 
 @media screen and (max-width: 990px) {
