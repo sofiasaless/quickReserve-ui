@@ -6,7 +6,7 @@ interface ContainerProps {
 
 const Container:FunctionComponent<ContainerProps> = ({children}) => {
   return (
-    <div className="container py-2">
+    <div className="container">
       {children}
     </div>
   );

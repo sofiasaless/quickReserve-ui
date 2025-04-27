@@ -1,0 +1,6 @@
+.card-reserva {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  background-color: var(--laranja-um);
+}

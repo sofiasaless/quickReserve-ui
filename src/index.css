@@ -14,8 +14,11 @@
   --laranja-dois-transparent: #cc9a067c;
   --preto-fosco: #212529;
   --vermelho: #e35d6a;
+  --vermelho-escuro: #ac4751;
   --azul: #6ea8fe;
   --verde: #75b798;
+  --verde-escuro: #578b73;
+  --cinza: #e8e8e8;
 }
 
 /* cores de texto */
@@ -30,6 +33,9 @@
 }
 
 /* tamanhos de texto */
+.text-zero {
+  font-size: 0.8rem;
+}
 .text-um {
   font-size: 1.2rem;
 }
@@ -45,6 +51,8 @@
   font-weight: 500;
 }
 
+/* botoes */
+
 .btn-laranja-um {
   background-color: var(--laranja-um);
   color: white;
@@ -55,6 +63,19 @@
 }
 .btn-laranja-um:hover {
   background-color: var(--laranja-dois);
+}
+
+.btn-laranja-dois {
+  background-color: var(--laranja-dois);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.btn-laranja-dois:hover {
+  transform: scale(1.15);
 }
 
 .btn-outline-laranja-um {
@@ -70,15 +91,89 @@
   color: white;
 }
 
+.btn-verde {
+  background-color: var(--verde);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-verde:hover {
+  background-color: var(--verde-escuro);
+}
+
+.btn-vermelho {
+  background-color: var(--vermelho);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-vermelho:hover {
+  background-color: var(--vermelho-escuro);
+}
+
 .btn-outline {
   background-color: transparent;
-  color: black;
+  color: var(--preto-fosco);
   border-radius: 10px;
   border: 2px solid var(--preto-fosco);
   cursor: pointer;
 }
 .btn-outline:hover {
   background-color: var(--preto-fosco);
-  border: none;
   color: white;
+}
+
+/* inputs */
+.input-reserva {
+  color: var(--preto-fosco);
+  border-radius: 10px;
+  border: 2px solid var(--laranja-dois);
+  padding: 8px;
+  width: 100%;
+}
+.input-reserva:focus {
+  outline: none;
+  border: 2px solid var(--laranja-um);
+}
+
+.input-padrao {
+  background: transparent;
+  color: var(--preto-fosco);
+  border-radius: 10px;
+  border: 2px solid var(--preto-fosco);
+  padding: 8px;
+  width: 100%;
+}
+.input-padrao:focus {
+  outline: none;
+  border: 2px solid var(--preto-fosco);
+}
+
+@media screen and (max-width: 990px) {
+  .responsivo {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .conteudo {
+    width: 100% !important;
+  }
+}
+
+/* definição das capas */
+.container-capa {
+  /* background-image: url(../../assets/material/savory-mexican-food-composition.jpg); */
+  height: 40vh;
+  background-size: cover;
+  background-position: initial;
+}
+
+.conteudo-capa {
+  background-color: #21252994;
+  width: 100%;
+  height: 100%;
 }
