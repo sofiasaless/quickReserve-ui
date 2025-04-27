@@ -24,8 +24,10 @@ const CardMesa:FunctionComponent<CardMesaProps> = ({numeroMesa, disponibilidade,
       />
       <span className='text-center'>{lugares} lugares</span>
       <div className='d-flex align-items-center gap-2'>
-        <div style={{backgroundColor: 'var(--verde)'}} className='disp-div rounded-circle' />
-        <span>Disponível</span>
+        <div 
+          style={{backgroundColor: `var(${disponibilidade?'--verde':'--vermelho'})`}}  className='disp-div rounded-circle' 
+        />
+        <span>{disponibilidade?'Disponível':'Reservada'}</span>
       </div>
     </div>
   )

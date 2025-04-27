@@ -5,6 +5,7 @@ import TiposCozinha from './pages/TiposCozinha/TiposCozinha';
 import LayoutPadrao from './pages/Layout/LayoutPadrao';
 import Reserva from './pages/Reserva/Reserva';
 import InicioRestaurante from './pages/InicioRestaurante/InicioRestaurante';
+import Mapeamento from './pages/Mapeamento/Mapeamento';
 
 function App() {
 
@@ -13,7 +14,8 @@ function App() {
       {/* <Inicio /> */}
       {/* <TiposCozinha /> */}
       {/* <Reserva /> */}
-      <InicioRestaurante />
+      {/* <InicioRestaurante /> */}
+      <Mapeamento />
     </LayoutPadrao>
   )
 }
