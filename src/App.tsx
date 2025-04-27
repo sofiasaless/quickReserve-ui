@@ -4,6 +4,7 @@ import Inicio from './pages/Inicio/Inicio';
 import TiposCozinha from './pages/TiposCozinha/TiposCozinha';
 import LayoutPadrao from './pages/Layout/LayoutPadrao';
 import Reserva from './pages/Reserva/Reserva';
+import InicioRestaurante from './pages/InicioRestaurante/InicioRestaurante';
 
 function App() {
 
@@ -11,7 +12,8 @@ function App() {
     <LayoutPadrao>
       {/* <Inicio /> */}
       {/* <TiposCozinha /> */}
-      <Reserva />
+      {/* <Reserva /> */}
+      <InicioRestaurante />
     </LayoutPadrao>
   )
 }

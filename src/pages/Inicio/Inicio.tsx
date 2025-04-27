@@ -1,4 +1,5 @@
-import './style.css'
+// assets
+import capa from '../../assets/material/savory-mexican-food-composition.jpg'
 
 // componentes
 import BarraPesquisa from '../../components/BarraPesquisa/BarraPesquisa'
@@ -10,7 +11,12 @@ const Inicio = () => {
 
   return (
     <>
-      <section className='container-capa'>
+      <section 
+        className='container-capa'
+        style={{
+          backgroundImage: `url(${capa})`
+        }}
+      >
         <div className='conteudo-capa d-flex align-items-center justify-content-center flex-column text-center'>
           <div className='container'>
             <h1 className='text-laranja-um fw-bold fst-italic'>Encontre, reserve e aproveite!</h1>

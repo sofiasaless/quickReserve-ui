@@ -30,6 +30,9 @@
 }
 
 /* tamanhos de texto */
+.text-zero {
+  font-size: 0.8rem;
+}
 .text-um {
   font-size: 1.2rem;
 }
@@ -119,4 +122,18 @@
   .conteudo {
     width: 100% !important;
   }
+}
+
+/* definição das capas */
+.container-capa {
+  /* background-image: url(../../assets/material/savory-mexican-food-composition.jpg); */
+  height: 40vh;
+  background-size: cover;
+  background-position: initial;
+}
+
+.conteudo-capa {
+  background-color: #21252994;
+  width: 100%;
+  height: 100%;
 }
