@@ -6,9 +6,11 @@ import LayoutPadrao from './pages/Layout/LayoutPadrao';
 import Reserva from './pages/Reserva/Reserva';
 import InicioRestaurante from './pages/InicioRestaurante/InicioRestaurante';
 import Mapeamento from './pages/Mapeamento/Mapeamento';
-import PerfilCliente from './pages/Layout/LayoutPerfilCliente';
+import LayoutPerfil from './pages/Layout/LayoutPerfil';
 import DadosCliente from './pages/DadosCliente/DadosCliente';
 import ReservasCliente from './pages/ReservasCliente/ReservasCliente';
+import DadosRestaurante from './pages/DadosRestaurante/DadosRestaurante';
+import GerenciaMesas from './pages/GerenciaMesas/GerenciaMesas';
 
 function App() {
 
@@ -22,14 +24,25 @@ function App() {
 
       {/* paginas de perfil do cliente */}
       {/* pagina dados do cliente */}
-      {/* <PerfilCliente>
+      {/* <LayoutPerfil>
         <DadosCliente />
-      </PerfilCliente> */}
+      </LayoutPerfil> */}
 
       {/* pagina dados do cliente */}
-      <PerfilCliente>
+      {/* <LayoutPerfil>
         <ReservasCliente />
-      </PerfilCliente>
+      </LayoutPerfil> */}
+
+      {/* paginas de perfil do restaurante */}
+      {/* pagina dados do restaurante */}
+      {/* <LayoutPerfil>
+        <DadosRestaurante />
+      </LayoutPerfil> */}
+
+      {/* pagina de gerenciamento de mesas */}
+      <LayoutPerfil>
+        <GerenciaMesas />
+      </LayoutPerfil>
 
 
     </LayoutPadrao>

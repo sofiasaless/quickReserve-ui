@@ -12,7 +12,7 @@ const LayoutPerfilCliente:FunctionComponent<LayoutPerfilClienteProps> = ({childr
       <section
         style={{
           backgroundColor: 'var(--cinza)',
-          height: 'calc(100vh + 100%)',
+          height: '100vh',
         }}
         className="d-flex shadow"
       >
