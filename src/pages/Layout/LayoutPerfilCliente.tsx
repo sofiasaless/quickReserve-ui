@@ -12,9 +12,9 @@ const LayoutPerfilCliente:FunctionComponent<LayoutPerfilClienteProps> = ({childr
       <section
         style={{
           backgroundColor: 'var(--cinza)',
-          height: '100vh',
+          height: 'calc(100vh + 100%)',
         }}
-        className="d-flex"
+        className="d-flex shadow"
       >
         <NavbarPerfil />
 

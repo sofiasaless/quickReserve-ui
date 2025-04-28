@@ -8,6 +8,7 @@ import InicioRestaurante from './pages/InicioRestaurante/InicioRestaurante';
 import Mapeamento from './pages/Mapeamento/Mapeamento';
 import PerfilCliente from './pages/Layout/LayoutPerfilCliente';
 import DadosCliente from './pages/DadosCliente/DadosCliente';
+import ReservasCliente from './pages/ReservasCliente/ReservasCliente';
 
 function App() {
 
@@ -21,8 +22,13 @@ function App() {
 
       {/* paginas de perfil do cliente */}
       {/* pagina dados do cliente */}
-      <PerfilCliente>
+      {/* <PerfilCliente>
         <DadosCliente />
+      </PerfilCliente> */}
+
+      {/* pagina dados do cliente */}
+      <PerfilCliente>
+        <ReservasCliente />
       </PerfilCliente>
 
 
