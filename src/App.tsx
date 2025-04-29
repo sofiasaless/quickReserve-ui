@@ -19,7 +19,7 @@ function App() {
       {/* <Inicio /> */}
       {/* <TiposCozinha /> */}
       {/* <Reserva /> */}
-      {/* <InicioRestaurante /> */}
+      <InicioRestaurante />
       {/* <Mapeamento /> */}
 
       {/* paginas de perfil do cliente */}
@@ -40,9 +40,9 @@ function App() {
       </LayoutPerfil> */}
 
       {/* pagina de gerenciamento de mesas */}
-      <LayoutPerfil>
+      {/* <LayoutPerfil>
         <GerenciaMesas />
-      </LayoutPerfil>
+      </LayoutPerfil> */}
 
 
     </LayoutPadrao>

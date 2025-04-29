@@ -5,6 +5,8 @@ import capa from '../../assets/material/caparestaurante.jpg'
 import Container from '../../components/Container/Container'
 import Titulos from '../../components/Titulos/Titulos'
 import CardReserva from '../../components/CardReserva/CardReserva'
+import ModalAcao from '../../components/ModalAcao/ModalAcao'
+import ModalAlertaAcao from '../../components/ModalAlertaAcao/ModalAlertaAcao'
 
 const InicioRestaurante = () => {
 
@@ -77,6 +79,10 @@ const InicioRestaurante = () => {
             </div>
           </div>
         </div>
+
+        {/* <ModalAcao titulo='Detalhes da reserva'/> */}
+
+        <ModalAlertaAcao titulo='Cancelar reserva' informacao='Tem certeza que deseja cancelar sua reserva? Você terá que solicitá-la novamente se quiser voltar a reservar.' />
 
       </Container >
     </>

@@ -16,6 +16,7 @@
   --vermelho: #e35d6a;
   --vermelho-escuro: #ac4751;
   --azul: #6ea8fe;
+  --azul-escuro: #4878be;
   --verde: #75b798;
   --verde-escuro: #578b73;
   --cinza: #e8e8e8;
@@ -102,6 +103,18 @@
 }
 .btn-verde:hover {
   background-color: var(--verde-escuro);
+}
+
+.btn-azul {
+  background-color: var(--azul);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-azul:hover {
+  background-color: var(--azul-escuro);
 }
 
 .btn-vermelho {
