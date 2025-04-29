@@ -141,6 +141,18 @@
   color: white;
 }
 
+.btn-outline-laranja {
+  background-color: transparent;
+  color: var(--laranja-um);
+  border-radius: 10px;
+  border: 2px solid var(--laranja-um);
+  cursor: pointer;
+}
+.btn-outline-laranja:hover {
+  background-color: var(--laranja-um);
+  color: white;
+}
+
 /* inputs */
 .input-reserva {
   color: var(--preto-fosco);

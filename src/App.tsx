@@ -11,41 +11,52 @@ import DadosCliente from './pages/DadosCliente/DadosCliente';
 import ReservasCliente from './pages/ReservasCliente/ReservasCliente';
 import DadosRestaurante from './pages/DadosRestaurante/DadosRestaurante';
 import GerenciaMesas from './pages/GerenciaMesas/GerenciaMesas';
+import CadastroCliente from './pages/Cadastro/CadastroCliente';
+import CadastroRestaurante from './pages/Cadastro/CadastroRestaurante';
+import LoginCliente from './pages/Login/LoginCliente';
+import LoginRestaurante from './pages/Login/LoginRestaurante';
 
 function App() {
 
   return (
-    <LayoutPadrao>
-      {/* <Inicio /> */}
-      {/* <TiposCozinha /> */}
-      {/* <Reserva /> */}
-      <InicioRestaurante />
-      {/* <Mapeamento /> */}
+    // <LayoutPadrao>
+    //   {/* <Inicio /> */}
+    //   {/* <TiposCozinha /> */}
+    //   {/* <Reserva /> */}
+    //   {/* <InicioRestaurante /> */}
+    //   {/* <Mapeamento /> */}
 
-      {/* paginas de perfil do cliente */}
-      {/* pagina dados do cliente */}
-      {/* <LayoutPerfil>
-        <DadosCliente />
-      </LayoutPerfil> */}
+    //   {/* paginas de perfil do cliente */}
+    //   {/* pagina dados do cliente */}
+    //   {/* <LayoutPerfil>
+    //     <DadosCliente />
+    //   </LayoutPerfil> */}
 
-      {/* pagina dados do cliente */}
-      {/* <LayoutPerfil>
-        <ReservasCliente />
-      </LayoutPerfil> */}
+    //   {/* pagina dados do cliente */}
+    //   {/* <LayoutPerfil>
+    //     <ReservasCliente />
+    //   </LayoutPerfil> */}
 
-      {/* paginas de perfil do restaurante */}
-      {/* pagina dados do restaurante */}
-      {/* <LayoutPerfil>
-        <DadosRestaurante />
-      </LayoutPerfil> */}
+    //   {/* paginas de perfil do restaurante */}
+    //   {/* pagina dados do restaurante */}
+    //   {/* <LayoutPerfil>
+    //     <DadosRestaurante />
+    //   </LayoutPerfil> */}
 
-      {/* pagina de gerenciamento de mesas */}
-      {/* <LayoutPerfil>
-        <GerenciaMesas />
-      </LayoutPerfil> */}
+    //   {/* pagina de gerenciamento de mesas */}
+    //   {/* <LayoutPerfil>
+    //     <GerenciaMesas />
+    //   </LayoutPerfil> */}
 
 
-    </LayoutPadrao>
+    // </LayoutPadrao>
+
+    // areas de interação com auth
+    // <CadastroCliente />
+    // <CadastroRestaurante />
+
+    // <LoginCliente />
+    <LoginRestaurante />
   )
 }
 
