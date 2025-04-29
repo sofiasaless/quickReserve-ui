@@ -20,7 +20,7 @@ function App() {
 
   return (
     // <LayoutPadrao>
-    //   {/* <Inicio /> */}
+    //  {/* <Inicio /> */}
     //   {/* <TiposCozinha /> */}
     //   {/* <Reserva /> */}
     //   {/* <InicioRestaurante /> */}
@@ -52,11 +52,11 @@ function App() {
     // </LayoutPadrao>
 
     // areas de interação com auth
-    // <CadastroCliente />
+    <CadastroCliente />
     // <CadastroRestaurante />
 
     // <LoginCliente />
-    <LoginRestaurante />
+    // <LoginRestaurante />
   )
 }
 
