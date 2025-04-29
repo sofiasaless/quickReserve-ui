@@ -52,8 +52,8 @@ function App() {
     // </LayoutPadrao>
 
     // areas de interação com auth
-    <CadastroCliente />
-    // <CadastroRestaurante />
+    // <CadastroCliente />
+    <CadastroRestaurante />
 
     // <LoginCliente />
     // <LoginRestaurante />
