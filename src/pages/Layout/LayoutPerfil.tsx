@@ -14,7 +14,7 @@ const LayoutPerfilCliente:FunctionComponent<LayoutPerfilClienteProps> = ({childr
           backgroundColor: 'var(--cinza)',
           height: '100vh',
         }}
-        className="d-flex"
+        className="d-flex shadow"
       >
         <NavbarPerfil />
 

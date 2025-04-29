@@ -16,9 +16,11 @@
   --vermelho: #e35d6a;
   --vermelho-escuro: #ac4751;
   --azul: #6ea8fe;
+  --azul-escuro: #4878be;
   --verde: #75b798;
   --verde-escuro: #578b73;
   --cinza: #e8e8e8;
+  --cinza-escuro: #6c6d6d;
 }
 
 /* cores de texto */
@@ -103,6 +105,18 @@
   background-color: var(--verde-escuro);
 }
 
+.btn-azul {
+  background-color: var(--azul);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-azul:hover {
+  background-color: var(--azul-escuro);
+}
+
 .btn-vermelho {
   background-color: var(--vermelho);
   color: white;
@@ -124,6 +138,18 @@
 }
 .btn-outline:hover {
   background-color: var(--preto-fosco);
+  color: white;
+}
+
+.btn-outline-laranja {
+  background-color: transparent;
+  color: var(--laranja-um);
+  border-radius: 10px;
+  border: 2px solid var(--laranja-um);
+  cursor: pointer;
+}
+.btn-outline-laranja:hover {
+  background-color: var(--laranja-um);
   color: white;
 }
 

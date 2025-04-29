@@ -1,0 +1,17 @@
+.modal-acao-corpo {
+  background-color: var(--cinza);
+  border: 4px solid var(--laranja-dois);
+}
+
+.modal-body h5, p {
+  color: var(--laranja-dois);
+}
+
+.modal-reserva-infos {
+  width: 100%;
+}
+
+.div-infos {
+  width: 100%;
+  background-color: var(--laranja-dois);
+}
