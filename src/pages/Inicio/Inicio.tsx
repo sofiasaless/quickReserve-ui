@@ -6,8 +6,29 @@ import BarraPesquisa from '../../components/BarraPesquisa/BarraPesquisa'
 import Container from '../../components/Container/Container'
 import Titulos from '../../components/Titulos/Titulos'
 import CardRestaurante from '../../components/CardRestaurante/CardRestaurante'
+import { useEffect, useState } from 'react'
+import { Restaurante } from '../../types/Restaurante'
+import { RestauranteService } from '../../services/restaurante.service'
 
 const Inicio = () => {
+
+  const [restaurantes, setRestaurantes] = useState<Restaurante[]>([])
+
+  useEffect(() => {
+    const recuperarRestaurantes = async () => {
+      const resService = new RestauranteService();
+      await resService.getRestaurantes().then((res) => {
+        // console.log('restarauntes recuperados', res)
+        setRestaurantes(res)
+      }
+      ).catch((error) => {
+        console.error("Erro ao buscar restaurantes:", error);
+      })
+    }
+
+    recuperarRestaurantes()
+
+  }, [restaurantes]);
 
   return (
     <>
@@ -35,24 +56,15 @@ const Inicio = () => {
 
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            <div className="col">
-              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
-            </div>
-            <div className="col">
-              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
-            </div>
-            <div className="col">
-              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
-            </div>
-            <div className="col">
-              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
-            </div>
-            <div className="col">
-              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
-            </div>
-            <div className="col">
-              <CardRestaurante nome='Fôrno' tipo='Pizzaria'/>
-            </div>
+
+            {
+              restaurantes.map((restaurante) => (
+                <div className="col" key={restaurante.id}>
+                  <CardRestaurante key={restaurante.id} nome={restaurante.nome} tipo={restaurante.tipoRestaurante} icone={restaurante.imagemPerfil} capa={restaurante.imagemCapa}/>
+                </div>
+              ))
+            }
+
           </div>
         </div>
 

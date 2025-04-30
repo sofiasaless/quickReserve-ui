@@ -6,7 +6,7 @@ export type Restaurante = {
   descricao: string;
   email: string;
   cnpj: string;
-  tipoRestaurante?: Categoria;
+  tipoRestaurante?: Categoria | string;
   senha: string;
   imagemPerfil?: string;
   imagemCapa?: string;
