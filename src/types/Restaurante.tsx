@@ -8,5 +8,7 @@ export type Restaurante = {
   cnpj: string;
   tipoRestaurante?: Categoria;
   senha: string;
+  imagemPerfil?: string;
+  imagemCapa?: string;
   dataCadastro?: Date;
 }

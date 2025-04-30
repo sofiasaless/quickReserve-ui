@@ -3,8 +3,26 @@ import './style.css'
 // assets
 import logo from '../../assets/material/reservationLogo.png';
 import { Link } from 'react-router-dom';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Cliente } from '../../types/Cliente';
+import { AuthService } from '../../services/auth.service';
 
 const LoginCliente = () => {
+
+  // const { register, handleSubmit } = useForm<Cliente>();
+
+  const onSubmitLogin: SubmitHandler<Cliente> = async (dadosCliente: Cliente) => {
+
+    const authService = new AuthService();
+    try {
+      const response = await authService.entrarComoCliente(dadosCliente);
+      console.log("Cliente cadastrado com sucesso:", response);
+    } catch (error) {
+      console.log("Erro ao cadastrar cliente:", error);
+    }
+
+  };
+
   return (
     <div className='vh-100 area-auth d-flex justify-content-center align-items-center'>
 
