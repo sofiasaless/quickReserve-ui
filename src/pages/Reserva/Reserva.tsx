@@ -77,8 +77,10 @@ const Reserva = () => {
             icone={imgInfoTemplate4}
           />
 
-          <div className='d-flex gap-3'>
-            <button className='btn-outline px-4 py-2'>Escolher data e horário</button>
+          <div className='d-flex flex-column gap-1'>
+            <label className='ms-2'>Escolher data e horário</label>
+            <input type="datetime-local" className='btn-outline px-4 py-2' />
+            {/* <button className='btn-outline px-4 py-2'>Escolher data e horário</button> */}
           </div>
 
 

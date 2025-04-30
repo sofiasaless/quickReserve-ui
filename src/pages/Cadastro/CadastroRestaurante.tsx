@@ -9,6 +9,7 @@ import { Restaurante } from '../../types/Restaurante';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AuthService } from '../../services/auth.service';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const CadastroRestaurante = () => {
 
@@ -82,11 +83,11 @@ const CadastroRestaurante = () => {
             )}
           </button>
 
-          <button className='btn-outline-laranja py-2 px-4'>Entrar</button>
+          <Link to={'/login-restaurante'} className='btn-outline-laranja py-2 px-4'>Entrar</Link>
         </div>
 
         <div className='d-flex justify-content-center mt-2'>
-          <button className='btn-outline-laranja py-2 px-4 text-decoration-underline fst-italic'>Sou um cliente</button>
+          <Link to={'/cadastro-cliente'} className='text-decoration-none btn-outline-laranja py-2 px-4 text-decoration-underline fst-italic'>Sou um cliente</Link>
         </div>
       </form>
 

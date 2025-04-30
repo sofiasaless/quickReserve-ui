@@ -1,15 +1,11 @@
-import { FunctionComponent } from "react";
 import Navbar from "../../components/Navbar/Navbar"
+import { Outlet } from "react-router-dom";
 
-interface LayoutPadraoProps {
-  children?: React.ReactNode;
-}
-
-const LayoutPadrao:FunctionComponent<LayoutPadraoProps> = ({children}) => {
+const LayoutPadrao = () => {
   return (
     <>
       <Navbar />
-      {children}
+      <Outlet />
     </>
   )
 }

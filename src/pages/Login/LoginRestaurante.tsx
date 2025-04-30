@@ -2,6 +2,7 @@ import './style.css'
 
 // assets
 import logo from '../../assets/material/reservationLogo.png';
+import { Link } from 'react-router-dom';
 
 const LoginRestaurante = () => {
   return (
@@ -23,11 +24,11 @@ const LoginRestaurante = () => {
         <div className='d-flex justify-content-between' style={{ width: '100%' }}>
           <button className='btn-laranja-um px-3'>Entrar</button>
 
-          <button className='btn-outline-laranja py-2 px-3'>Fazer cadastro</button>
+          <Link to={'/cadastro-restaurante'} className='text-decoration-none btn-outline-laranja py-2 px-3'>Fazer cadastro</Link>
         </div>
 
         <div className='d-flex justify-content-center mt-2'>
-          <button className='btn-outline-laranja py-2 px-4 text-decoration-underline fst-italic'>Sou um cliente</button>
+          <Link to={'/login-cliente'} className='text-decoration-none btn-outline-laranja py-2 px-4 text-decoration-underline fst-italic'>Sou um cliente</Link>
         </div>
       </form>
 

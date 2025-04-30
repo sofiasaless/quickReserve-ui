@@ -5,6 +5,7 @@ import imgCapaTemplate from '../../assets/material/imageTemplate.png'
 import imgIconeTemplate from '../../assets/material/imageIconeTemplate.png'
 
 import { FunctionComponent } from "react";
+import { Link } from 'react-router-dom';
 
 interface CardRestauranteProps {
   nome: string;
@@ -31,7 +32,7 @@ const CardRestaurante: FunctionComponent<CardRestauranteProps> = ({ nome, tipo }
         </div>
 
         <div>
-          <button className='btn-outline-laranja-um px-4 py-1'>Fazer reserva</button>
+          <Link to={'/fazer-reserva'} className='text-decoration-none btn-outline-laranja-um px-3 py-1'>Fazer reserva</Link>
         </div>
 
       </div>

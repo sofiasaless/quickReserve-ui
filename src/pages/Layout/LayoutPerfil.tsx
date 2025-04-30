@@ -1,12 +1,8 @@
-import { FunctionComponent } from "react";
 import Container from "../../components/Container/Container";
 import NavbarPerfil from "../../components/NavbarPerfil/NavbarPerfil";
+import { Outlet } from "react-router-dom";
 
-interface LayoutPerfilClienteProps {
-  children?: React.ReactNode;
-}
-
-const LayoutPerfilCliente:FunctionComponent<LayoutPerfilClienteProps> = ({children}) => {
+const LayoutPerfil = () => {
   return (
     <Container>
       <section
@@ -19,7 +15,7 @@ const LayoutPerfilCliente:FunctionComponent<LayoutPerfilClienteProps> = ({childr
         <NavbarPerfil />
 
         <div className="d-flex flex-column px-5 py-3 gap-4" style={{ width: '100%' }}>
-          {children}
+          <Outlet />
         </div>
         
       </section>
@@ -27,4 +23,4 @@ const LayoutPerfilCliente:FunctionComponent<LayoutPerfilClienteProps> = ({childr
   )
 }
 
-export default LayoutPerfilCliente;
+export default LayoutPerfil;
