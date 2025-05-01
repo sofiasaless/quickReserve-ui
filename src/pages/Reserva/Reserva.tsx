@@ -1,25 +1,55 @@
 // assets
-import capaImagem from '../../assets/material/close-up-person-cooking.jpg'
-import imgIconeTemplate from '../../assets/material/imageIconeTemplate.png'
 import imgInfoTemplate1 from '../../assets/material/store.png'
 import imgInfoTemplate2 from '../../assets/material/clock.png'
 import imgInfoTemplate3 from '../../assets/material/contact-mail.png'
 import imgInfoTemplate4 from '../../assets/material/reservationLogo.png'
 import imgIconeInfo from '../../assets/material/calendar.png'
 
+import './style.css'
+
 // components
 import CardRestauranteInfos from '../../components/CardRestauranteInfos/CardRestauranteInfos'
-
-import './style.css'
 import CardMesa from '../../components/CardMesa/CardMesa'
 import ModalAlerta from '../../components/ModalAlerta/ModalAlerta'
 
+// imports
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Restaurante } from '../../types/Restaurante'
+import { RestauranteService } from '../../services/restaurante.service'
+import { Mesa } from '../../types/Mesa'
+import { MesaService } from '../../services/mesa.service'
+
 const Reserva = () => {
+
+  const { restauranteId } = useParams()
+
+  const [restaurante, setRestaurante] = useState<Restaurante>()
+
+  const [mesas, setMesas] = useState<Mesa[]>()
+
+  useEffect(() => {
+    const recuperarRestaurante = async () => {
+      const restService = new RestauranteService()
+      await restService.getRestaurantePorId(restauranteId).then((dadosRestaurante) => {
+        setRestaurante(dadosRestaurante);
+      });
+
+      const mesaServ = new MesaService()
+      await mesaServ.getMesaPorRestauranteId(restauranteId).then((dadosMesas) => {
+        setMesas(dadosMesas)
+      })
+    }
+
+    recuperarRestaurante()
+    
+  }, [restauranteId])
+
   return (
     <section className='container-reserva'>
       <section
         style={{
-          backgroundImage: `url(${capaImagem})`,
+          backgroundImage: `url(${restaurante?.imagemCapa})`,
           backgroundPosition: 'center',
         }}
         className='container-capa'
@@ -34,7 +64,7 @@ const Reserva = () => {
         <div className='d-flex flex-column gap-4 conteudo'>
           <div className='d-flex gap-3 align-items-center mb-5'>
             <img
-              src={imgIconeTemplate}
+              src={restaurante?.imagemPerfil}
               alt=""
               className='rounded-3'
               style={{
@@ -43,26 +73,26 @@ const Reserva = () => {
               }}
             />
             <div className='d-flex flex-column'>
-              <span className='text-um weigth-semibold'>Forno e Brasa</span>
-              <span className='fst-italic'>Pizzaria</span>
+              <span className='text-um weigth-semibold'>{restaurante?.nome}</span>
+              <span className='fst-italic'>{restaurante?.tipoRestaurante?.charAt(0).concat(restaurante?.tipoRestaurante?.toLowerCase().slice(1))}</span>
             </div>
           </div>
 
           <CardRestauranteInfos
             titulo='Sobre'
-            informacao='Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique quisquam, eius, odit repellat praesentium quo cum nesciunt maiores, porro hic vel. Ipsa, dolore voluptatibus ea neque sint ratione molestias modi.'
+            informacao={restaurante?.descricao}
             icone={imgInfoTemplate1}
           />
 
           <CardRestauranteInfos
             titulo='Horários'
-            informacao='Lorem ipsum, dolor sit amet consectetur adipisicing elit..'
+            informacao='Lorem ipsum, dolor sit amet consectetur adipisicing elit.'
             icone={imgInfoTemplate2}
           />
 
           <CardRestauranteInfos
             titulo='Contatos'
-            informacao='Lorem ipsum, dolor sit amet consectetur adipisicing elit..'
+            informacao={restaurante?.email}
             icone={imgInfoTemplate3}
           />
 
@@ -77,44 +107,25 @@ const Reserva = () => {
             icone={imgInfoTemplate4}
           />
 
-          <div className='d-flex gap-3'>
-            <button className='btn-outline px-4 py-2'>Escolher data e horário</button>
+          <div className='d-flex flex-column gap-1'>
+            <label className='ms-2'>Escolher data e horário</label>
+            <input type="datetime-local" className='btn-outline px-4 py-2' />
+            {/* <button className='btn-outline px-4 py-2'>Escolher data e horário</button> */}
           </div>
 
 
           {/* mesas disponíveis para o restaurante */}
           <div className='mt-3'>
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
+
+              {
+                mesas?.map((mesa) => (
+                  <div key={mesa.id} className="col">
+                    <CardMesa numeroMesa={mesa.numero} lugares={mesa.capacidadePessoas} disponibilidade={true} />
+                  </div>
+                ))
+              }
+
             </div>
           </div>
 

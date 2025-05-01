@@ -1,20 +1,15 @@
-import axios from "axios";
 import { Cliente } from "../types/Cliente";
 import { Restaurante } from "../types/Restaurante";
+import { FormLogin } from "../types/FormLogin";
+import { Token } from "../types/Token";
+import api from "./api";
 
 export class AuthService {
 
-  private apiUrl: string = 'http://localhost:8080';
-
-  // posteriormente será usado...
-  // private token: string | null = null;
-
-  public constructor () {
-    // this.token = token || null;
-  }
+  public constructor () {}
 
   public async cadastrarCliente(cliente: Cliente) {
-    return await axios.post<Cliente>(`${this.apiUrl}/cliente/cadastrar`, cliente)
+    return await api.post<Cliente>(`/cliente/cadastrar`, cliente)
       .then(response => {
         return response.data;
       })
@@ -25,7 +20,7 @@ export class AuthService {
   }
 
   public async cadastrarRestaurante(restaurante: Restaurante) {
-    return await axios.post<Restaurante>(`${this.apiUrl}/restaurante/cadastrar`, restaurante)
+    return await api.post<Restaurante>(`/restaurante/cadastrar`, restaurante)
       .then(response => {
         return response.data;
       })
@@ -33,6 +28,18 @@ export class AuthService {
         console.error("Erro ao cadastrar restaurante:", error);
         throw error;
       });
+  }
+
+  public async entrarComoRestaurante(dadosLogin: FormLogin) {
+    await api.post<Token>(`/entrar/restaurante`, dadosLogin)
+    .then(response => {
+      localStorage.setItem('token', response.data.token)
+      return response.status
+    })
+    .catch(error => {
+      console.log('erro ao tentar fazer login ', error)
+      throw error;
+    })
   }
 
 

@@ -7,6 +7,9 @@ import { FunctionComponent } from 'react';
 // components
 import Logo from '../Logo/Logo';
 
+// imports
+import { Link } from 'react-router-dom';
+
 interface NavbarProps {
   user?: boolean;
   onLogout?: () => void;
@@ -25,8 +28,8 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
 
         <div className="navbar-nav d-flex flex-row gap-4 justify-content-center align-items-center">
           <div className='gap-5 d-flex flex-row justify-content-center align-items-center'>
-            <a className="fw-bold text-laranja-um text-decoration-none active" aria-current="page" href="#">Início</a>
-            <a className="fw-bold text-laranja-um text-decoration-none" href="#">Tipos de cozinha</a>
+            <Link to={'/'} className="fw-bold text-laranja-um text-decoration-none active" aria-current="page">Início</Link>
+            <Link to={'/tipos-cozinha'} className="fw-bold text-laranja-um text-decoration-none">Tipos de cozinha</Link>
           </div>
 
           <div className='vertical-break rounded-4'></div>

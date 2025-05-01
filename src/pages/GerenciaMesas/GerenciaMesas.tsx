@@ -1,7 +1,44 @@
+// assets e componentes
 import usericon from '../../assets/material/restaurant.png'
 import CardMesaEditavel from '../../components/CardMesaEditavel/CardMesaEditavel';
 
+// imports
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { Mesa } from '../../types/Mesa';
+import { MesaService } from '../../services/mesa.service';
+import { useEffect, useState } from 'react';
+import { RestauranteService } from '../../services/restaurante.service';
+
 const GerenciaMesas = () => {
+
+  const { register, handleSubmit } = useForm<Mesa>();
+
+  const [nomeRestaurante, setNomeRestaurante] = useState<string>()
+  const [mesas, setMesas] = useState<Mesa[]>([])
+
+  const mesaServ = new MesaService()
+
+  const onSubmitAdicionar: SubmitHandler<Mesa> = async (dadosMesa: Mesa) => {
+    await mesaServ.adicionarNovaMesa(dadosMesa);
+  };
+
+  useEffect(() => {
+    const recuperarDadosRestaurante = async () => {
+      const restServ = new RestauranteService()
+      await restServ.getRestaurantePorToken().then(async (dados) => {
+        setNomeRestaurante(dados.nome)
+
+        await mesaServ.getMesaPorRestauranteId(dados?.id).then((dadosMesas) => {
+          setMesas(dadosMesas)
+          // console.log(dadosMesas)
+        })
+      })
+    }
+
+    recuperarDadosRestaurante()
+
+  }, [])
+
   return (
     <div className="d-flex flex-column gap-4">
       <div className="d-flex gap-2 align-items-center">
@@ -13,7 +50,7 @@ const GerenciaMesas = () => {
           }}
         />
         <div className="d-flex flex-column">
-          <span className='text-um weigth-semibold text-uppercase'>Tocanto Restro</span>
+          <span className='text-um weigth-semibold text-uppercase'>{nomeRestaurante}</span>
           <span>Aqui estão os dados do seu estabelecimento.</span>
         </div>
       </div>
@@ -23,36 +60,32 @@ const GerenciaMesas = () => {
       <form className="area-dados-cliente d-flex flex-column gap-3">
         <div className='d-flex flex-column gap-1'>
           <label className='ms-2'>Número da mesa</label>
-          <input type="text" className='input-padrao' />
+          <input type="text" className='input-padrao' {...register("numero", { required: "Nome é obrigatório" })} />
         </div>
 
         <div className='d-flex flex-column gap-1'>
-          <label className='ms-2'>Capacidade</label>
-          <input type="text" className='input-padrao' />
+          <label className='ms-2'>Capacidade de pessoas</label>
+          <input type="text" className='input-padrao' {...register("capacidadePessoas", { required: "Nome é obrigatório" })} />
         </div>
 
       </form>
 
       <div className='d-flex justify-content-end'>
-        <button className='btn-verde px-5 py-2'>Adicionar</button>
+        <button onClick={handleSubmit(onSubmitAdicionar)} className='btn-verde px-5 py-2'>Adicionar</button>
       </div>
 
       <span className='text-uppercase fw-bold text-um'>Editar/excluir mesas</span>
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-          <div className="col">
-            <CardMesaEditavel disponibilidade={true} lugares={4} numeroMesa={10} />
-          </div>
-          <div className="col">
-            <CardMesaEditavel disponibilidade={true} lugares={4} numeroMesa={10} />
-          </div>
-          <div className="col">
-            <CardMesaEditavel disponibilidade={true} lugares={4} numeroMesa={10} />
-          </div>
-          <div className="col">
-            <CardMesaEditavel disponibilidade={true} lugares={4} numeroMesa={10} />
-          </div>
+
+          {
+            mesas.map((mesa) => (
+              <div key={mesa.id} className="col">
+                <CardMesaEditavel disponibilidade={true} lugares={mesa.capacidadePessoas} numeroMesa={mesa.numero} />
+              </div>
+            ))
+          }
         </div>
       </div>
 

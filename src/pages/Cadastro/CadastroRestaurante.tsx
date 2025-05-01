@@ -9,16 +9,34 @@ import { Restaurante } from '../../types/Restaurante';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AuthService } from '../../services/auth.service';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import FotoSeletor from '../../components/FotoSeletor/FotoSeletor';
+import UploadImagem from '../../services/cloudinary.service';
 
 const CadastroRestaurante = () => {
 
   const { register, handleSubmit } = useForm<Restaurante>();
   const [enviando, setEnviando] = useState<boolean>(false)
 
+  // state para fotos
+  const [fotoPerfil, setFotoPerfil] = useState<File | null>(null);
+  const [fotoCapa, setFotoCapa] = useState<File | null>(null);
+
   const onSubmitCadastrar: SubmitHandler<Restaurante> = async (dadosRestaurante: Restaurante) => {
     // console.log(dadosRestaurante)
     setEnviando(true);
 
+    // primeiro é necessário fazer o upload das fotos
+    try {
+      dadosRestaurante.imagemPerfil = await UploadImagem(fotoPerfil);
+      dadosRestaurante.imagemCapa = await UploadImagem(fotoCapa);
+    } catch (error) {
+      console.log("Erro ao fazer upload das imagens:", error);
+    }
+
+    // console.log("Dados do restaurante:", dadosRestaurante);
+
+    // agora é possível cadastrar o restaurante
     const authService = new AuthService();
     try {
       const response = await authService.cadastrarRestaurante(dadosRestaurante);
@@ -31,10 +49,29 @@ const CadastroRestaurante = () => {
   };
 
   return (
-    <div className='vh-100 area-auth d-flex justify-content-center align-items-center'>
+    <div className='area-cad d-flex justify-content-center align-items-center py-4'>
 
       <form className='p-4 bg-white rounded-3 shadow-sm d-flex flex-column gap-3 justify-content-center align-items-center'>
         <img src={logo} className='text-center' style={{ width: '80px' }} />
+
+        <div className='d-flex gap-4'>
+          <FotoSeletor 
+            onImageSelect={(file) => console.log("Imagem selecionada:", file)}
+            alturaImagem={100}
+            larguraImagem={100}
+            arredondamento={50}
+            descricao='Foto de perfil'
+            guardarImagem={(file) => setFotoPerfil(file)}
+          />
+          <FotoSeletor 
+            onImageSelect={(file) => console.log("Imagem selecionada:", file)}
+            alturaImagem={100}
+            larguraImagem={160}
+            arredondamento={10}
+            descricao='Foto de capa'
+            guardarImagem={(file) => setFotoCapa(file)}
+          />
+        </div>
 
         <div>
           <label className="form-label ms-1">Nome do estabelecimento</label>
@@ -82,11 +119,11 @@ const CadastroRestaurante = () => {
             )}
           </button>
 
-          <button className='btn-outline-laranja py-2 px-4'>Entrar</button>
+          <Link to={'/login-restaurante'} className='btn-outline-laranja py-2 px-4'>Entrar</Link>
         </div>
 
         <div className='d-flex justify-content-center mt-2'>
-          <button className='btn-outline-laranja py-2 px-4 text-decoration-underline fst-italic'>Sou um cliente</button>
+          <Link to={'/cadastro-cliente'} className='text-decoration-none btn-outline-laranja py-2 px-4 text-decoration-underline fst-italic'>Sou um cliente</Link>
         </div>
       </form>
 
