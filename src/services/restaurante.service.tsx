@@ -1,14 +1,12 @@
-import axios from "axios";
 import { Restaurante } from "../types/Restaurante";
+import api from "./api";
 
 export class RestauranteService {
-
-  private apiUrl: string = 'http://localhost:8080';
 
   constructor () {}
 
   public async getRestaurantes() {
-    return await axios.get<Restaurante[]>(`${this.apiUrl}/restaurante/`).then(response => {
+    return await api.get<Restaurante[]>(`/restaurante/`).then(response => {
       return response.data;
     }
     ).catch(error => {
@@ -18,7 +16,7 @@ export class RestauranteService {
   }
 
   public async getRestaurantePorId(restauranteId: string | number | undefined) {
-    return await axios.get<Restaurante>(`${this.apiUrl}/restaurante/${restauranteId}`).then(response => {
+    return await api.get<Restaurante>(`/restaurante/${restauranteId}`).then(response => {
       return response.data;
     }
     ).catch(error => {
