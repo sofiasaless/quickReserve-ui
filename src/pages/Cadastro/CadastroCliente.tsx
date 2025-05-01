@@ -1,14 +1,14 @@
 import './style.css'
 
-// assets
-import logo from '../../assets/material/reservationLogo.png';
+// componentes
+import Logo from '../../components/Logo/Logo';
 
 // imports
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { AuthService } from '../../services/auth.service';
 import { Cliente } from '../../types/Cliente';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CadastroCliente = () => {
 
@@ -16,6 +16,7 @@ const CadastroCliente = () => {
   const { register, handleSubmit } = useForm<Cliente>()
 
   const [enviando, setEnviando] = useState<boolean>(false)
+  const navegar = useNavigate()
 
   const onSubmitCadastrar: SubmitHandler<Cliente> = async (dadosCliente: Cliente) => {
     setEnviando(true);
@@ -24,6 +25,9 @@ const CadastroCliente = () => {
     try {
       const response = await authService.cadastrarCliente(dadosCliente);
       console.log("Cliente cadastrado com sucesso:", response);
+      
+      // redirecionando para area de login
+      navegar('/login-cliente')
     } catch (error) {
       console.log("Erro ao cadastrar cliente:", error);
     }
@@ -32,22 +36,26 @@ const CadastroCliente = () => {
   };
 
   return (
-    <div className='vh-100 area-auth d-flex justify-content-center align-items-center'>
+    <div className='area-auth d-flex justify-content-center align-items-center py-2'>
 
       <form className='p-4 bg-white rounded-3 shadow-sm d-flex flex-column gap-3 justify-content-center align-items-center'>
-        <img src={logo} className='text-center' style={{ width: '80px' }} />
+        <Logo />
 
         <div>
+          <p className='fst-italic weigth-semibold'>Preencha os dados para prosseguir com seu cadastro!</p>
+        </div>
+
+        <div style={{ width: '100%' }}>
           <label className="form-label ms-1">Nome completo</label>
           <input type="text" className="form-control" {...register("nome", { required: "Nome é obrigatório" })} />
         </div>
 
-        <div>
+        <div style={{ width: '100%' }}>
           <label className="form-label ms-1">E-mail</label>
           <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="" {...register("email", { required: "Nome é obrigatório" })} />
         </div>
 
-        <div>
+        <div style={{ width: '100%' }}>
           <label className="form-label ms-1">CPF</label>
           <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="" {...register("cpf", { required: "Nome é obrigatório" })} />
         </div>
@@ -57,7 +65,7 @@ const CadastroCliente = () => {
           <input type="date" className="form-control" id="exampleFormControlInput1" placeholder="" {...register("dataAniversario", { required: "Nome é obrigatório" })} />
         </div>
 
-        <div>
+        <div style={{ width: '100%' }}>
           <label className="form-label ms-1">Senha</label>
           <input type="password" className="form-control" id="exampleFormControlInput1" placeholder="" {...register("senha", { required: "Nome é obrigatório" })} />
         </div>

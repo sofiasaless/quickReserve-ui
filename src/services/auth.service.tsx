@@ -42,5 +42,18 @@ export class AuthService {
     })
   }
 
+  public async entrarComoCliente(dadosLogin: FormLogin) {
+    await api.post<Token>(`/entrar/cliente`, dadosLogin)
+    .then(response => {
+      localStorage.setItem('token', response.data.token)
+      console.log('token setado com sucesso')
+      return response.status
+    })
+    .catch(error => {
+      console.log('erro ao tentar fazer login ', error)
+      throw error;
+    })
+  }
+
 
 }

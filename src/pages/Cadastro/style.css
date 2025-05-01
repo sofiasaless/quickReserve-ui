@@ -1,3 +1,7 @@
 .area-cad {
   background-color: var(--laranja-um);
 }
+
+.area-auth {
+  height: 100%;
+}

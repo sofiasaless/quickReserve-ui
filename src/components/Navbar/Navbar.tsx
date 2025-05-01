@@ -2,7 +2,7 @@ import './style.css';
 import usuarioLogado from '../../assets/material/user.png'
 import restauranteLogado from '../../assets/material/restaurant.png'
 
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 
 // components
 import Logo from '../Logo/Logo';
@@ -17,6 +17,22 @@ interface NavbarProps {
 }
 
 const Navbar: FunctionComponent<NavbarProps> = () => {
+
+  const [logado, setLogado] = useState<boolean>(false)
+
+  useEffect(() => {
+    const verificarCondicoesUsuario = async () => {
+      let token = localStorage.getItem('token');
+      if (!token) {
+        setLogado(false)
+        return
+      }
+      setLogado(true)
+    }
+
+    verificarCondicoesUsuario()
+
+  }, [])
 
   return (
     <nav id='navbar-items' className="navbar navbar-expand-lg navbar-light bg-light py-2 sticky-top">
@@ -33,7 +49,15 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
           </div>
 
           <div className='vertical-break rounded-4'></div>
-          <button className='btn-laranja-um px-5'>Entrar</button>
+          {
+            logado ?
+            <Link to={'/'}>
+              <img src={usuarioLogado} className='img-logo-usuarios' alt="" />
+            </Link>
+            :
+            <Link to={'/login-cliente'} className='text-decoration-none btn-laranja-um px-5'>Entrar</Link>
+          }
+
           {/* <img src={usuarioLogado} className='img-logo-usuarios' alt="" /> */}
           {/* <img src={restauranteLogado} className='img-logo-usuarios' alt="" /> */}
         </div>
