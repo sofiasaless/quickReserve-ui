@@ -17,6 +17,8 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { Restaurante } from '../../types/Restaurante'
 import { RestauranteService } from '../../services/restaurante.service'
+import { Mesa } from '../../types/Mesa'
+import { MesaService } from '../../services/mesa.service'
 
 const Reserva = () => {
 
@@ -24,12 +26,19 @@ const Reserva = () => {
 
   const [restaurante, setRestaurante] = useState<Restaurante>()
 
+  const [mesas, setMesas] = useState<Mesa[]>()
+
   useEffect(() => {
     const recuperarRestaurante = async () => {
       const restService = new RestauranteService()
       await restService.getRestaurantePorId(restauranteId).then((dadosRestaurante) => {
         setRestaurante(dadosRestaurante);
       });
+
+      const mesaServ = new MesaService()
+      await mesaServ.getMesaPorRestauranteId(restauranteId).then((dadosMesas) => {
+        setMesas(dadosMesas)
+      })
     }
 
     recuperarRestaurante()
@@ -108,36 +117,15 @@ const Reserva = () => {
           {/* mesas disponíveis para o restaurante */}
           <div className='mt-3'>
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
-              <div className="col">
-                <CardMesa numeroMesa={10} lugares={4} disponibilidade={true} />
-              </div>
+
+              {
+                mesas?.map((mesa) => (
+                  <div key={mesa.id} className="col">
+                    <CardMesa numeroMesa={mesa.numero} lugares={mesa.capacidadePessoas} disponibilidade={true} />
+                  </div>
+                ))
+              }
+
             </div>
           </div>
 

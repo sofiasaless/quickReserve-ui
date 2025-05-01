@@ -25,4 +25,14 @@ export class RestauranteService {
     });
   }
 
+  public async getRestaurantePorToken() {
+    return await api.get<Restaurante>(`/restaurante/perfil`).then(response => {
+      return response.data;
+    }
+    ).catch(error => {
+      console.error("Erro ao buscar restaurantes:", error);
+      throw error;
+    });
+  }
+
 }
