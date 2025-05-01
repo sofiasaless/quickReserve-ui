@@ -17,4 +17,14 @@ export class RestauranteService {
     });
   }
 
+  public async getRestaurantePorId(restauranteId: string | number | undefined) {
+    return await axios.get<Restaurante>(`${this.apiUrl}/restaurante/${restauranteId}`).then(response => {
+      return response.data;
+    }
+    ).catch(error => {
+      console.error("Erro ao buscar restaurantes:", error);
+      throw error;
+    });
+  }
+
 }

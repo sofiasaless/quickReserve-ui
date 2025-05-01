@@ -19,7 +19,7 @@ const CardRestauranteInfos: FunctionComponent<CardRestauranteInfosProps> = ({tit
 
       <div>
         <span className="fw-bold">{titulo}</span>
-        <p className="pe-4">{informacao}</p>
+        <p className="pe-4 text-black">{informacao}</p>
       </div>
     </div>
   )

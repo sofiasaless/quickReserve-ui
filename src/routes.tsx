@@ -36,7 +36,7 @@ const Rotas = () => {
           />
 
           <Route
-            path="/fazer-reserva"
+            path="/fazer-reserva/:restauranteId"
             element={
               <Reserva />
             }

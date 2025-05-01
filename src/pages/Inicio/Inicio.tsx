@@ -18,7 +18,6 @@ const Inicio = () => {
     const recuperarRestaurantes = async () => {
       const resService = new RestauranteService();
       await resService.getRestaurantes().then((res) => {
-        // console.log('restarauntes recuperados', res)
         setRestaurantes(res)
       }
       ).catch((error) => {
@@ -60,7 +59,7 @@ const Inicio = () => {
             {
               restaurantes.map((restaurante) => (
                 <div className="col" key={restaurante.id}>
-                  <CardRestaurante key={restaurante.id} nome={restaurante.nome} tipo={restaurante.tipoRestaurante} icone={restaurante.imagemPerfil} capa={restaurante.imagemCapa}/>
+                  <CardRestaurante idRestaurante={restaurante.id} nome={restaurante.nome} tipo={restaurante.tipoRestaurante} icone={restaurante.imagemPerfil} capa={restaurante.imagemCapa}/>
                 </div>
               ))
             }
