@@ -2,7 +2,7 @@ import './style.css';
 import usuarioLogado from '../../assets/material/user.png'
 import restauranteLogado from '../../assets/material/restaurant.png'
 
-import { FunctionComponent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // components
 import Logo from '../Logo/Logo';
@@ -10,25 +10,26 @@ import Logo from '../Logo/Logo';
 // imports
 import { Link } from 'react-router-dom';
 import { TipoUsuario } from '../../enum/TipoUsuario';
+import { AuthService } from '../../services/auth.service';
+import { HttpStatusCode } from 'axios';
 
-interface NavbarProps {
-  user?: boolean;
-  onLogout?: () => void;
-  onLogin?: () => void;
-}
+const Navbar = () => {
 
-const Navbar: FunctionComponent<NavbarProps> = () => {
-
-  const [logado, setLogado] = useState<boolean>(false)
+  const [estadoUsuario, setEstadoUsuario] = useState<HttpStatusCode>(HttpStatusCode.Unauthorized)
 
   useEffect(() => {
     const verificarCondicoesUsuario = async () => {
       let token = localStorage.getItem('token');
       if (!token) {
-        setLogado(false)
+        setEstadoUsuario(HttpStatusCode.Unauthorized)
         return
       }
-      setLogado(true)
+      
+      // verificando se o token nao expirou
+      const authServ = new AuthService()
+      const resultado = await authServ.verificarEstadoUsuario(TipoUsuario.CLIENTE)
+      setEstadoUsuario(resultado);
+
     }
 
     verificarCondicoesUsuario()
@@ -51,7 +52,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
 
           <div className='vertical-break rounded-4'></div>
           {
-            logado ?
+            (estadoUsuario === HttpStatusCode.Accepted) ?
             <Link 
               to={'/dados-cliente'} 
               state={{

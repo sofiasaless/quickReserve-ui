@@ -3,6 +3,8 @@ import { Restaurante } from "../types/Restaurante";
 import { FormLogin } from "../types/FormLogin";
 import { Token } from "../types/Token";
 import api from "./api";
+import { TipoUsuario } from "../enum/TipoUsuario";
+import { HttpStatusCode } from "axios";
 
 export class AuthService {
 
@@ -31,7 +33,7 @@ export class AuthService {
   }
 
   public async entrarComoRestaurante(dadosLogin: FormLogin) {
-    await api.post<Token>(`/entrar/restaurante`, dadosLogin)
+    await api.post<Token>(`/auth/entrar/restaurante`, dadosLogin)
     .then(response => {
       localStorage.setItem('token', response.data.token)
       return response.status
@@ -43,7 +45,7 @@ export class AuthService {
   }
 
   public async entrarComoCliente(dadosLogin: FormLogin) {
-    await api.post<Token>(`/entrar/cliente`, dadosLogin)
+    await api.post<Token>(`/auth/entrar/cliente`, dadosLogin)
     .then(response => {
       localStorage.setItem('token', response.data.token)
       console.log('token setado com sucesso')
@@ -52,6 +54,16 @@ export class AuthService {
     .catch(error => {
       console.log('erro ao tentar fazer login ', error)
       throw error;
+    })
+  }
+
+  public async verificarEstadoUsuario(tipo: TipoUsuario): Promise<HttpStatusCode> {
+    return await api.get(`/auth/${tipo.toLowerCase()}/status`)
+    .then(() => {
+      return HttpStatusCode.Accepted
+    })
+    .catch(()=> {
+      return HttpStatusCode.Unauthorized
     })
   }
 
