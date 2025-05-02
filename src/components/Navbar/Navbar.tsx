@@ -9,6 +9,7 @@ import Logo from '../Logo/Logo';
 
 // imports
 import { Link } from 'react-router-dom';
+import { TipoUsuario } from '../../enum/TipoUsuario';
 
 interface NavbarProps {
   user?: boolean;
@@ -51,7 +52,12 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
           <div className='vertical-break rounded-4'></div>
           {
             logado ?
-            <Link to={'/'}>
+            <Link 
+              to={'/dados-cliente'} 
+              state={{
+                tipo: TipoUsuario.CLIENTE 
+              }}
+            >
               <img src={usuarioLogado} className='img-logo-usuarios' alt="" />
             </Link>
             :
