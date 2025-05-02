@@ -4,6 +4,7 @@ import './style.css'
 import imgMeusDados from '../../assets/material/profile.png'
 import imgReservas from '../../assets/material/to-do-list.png'
 import imgMesas from '../../assets/material/table.png'
+import imgSair from '../../assets/material/logout.png'
 
 // imports
 import { TipoUsuario } from '../../enum/TipoUsuario'
@@ -44,7 +45,7 @@ const NavbarPerfil = () => {
   }, [])
 
   return (
-    <div className="div-navbar-perfil d-flex flex-column flex-shrink-0 p-4" style={{ width: '280px' }}>
+    <div className="div-navbar-perfil d-flex flex-column justify-content-between flex-shrink-0 p-4" style={{ width: '280px' }}>
       {
         tipoUsuario === TipoUsuario.CLIENTE ?
           <ul className="nav nav-pills flex-column mb-auto gap-2">
@@ -107,6 +108,25 @@ const NavbarPerfil = () => {
             </li>
           </ul>
       }
+      <hr />
+      <ul className='nav nav-pills'>
+        <li className="nav-item d-flex align-items-center">
+          <img
+            src={imgSair} alt=""
+            style={{
+              height: '25px'
+            }}
+          />
+          <a className="nav-link link-light" aria-current="page"
+            onClick={() => {
+              localStorage.removeItem('token')
+              window.location.reload()
+            }}
+          >
+            Sair
+          </a>
+        </li>
+      </ul>
 
     </div>
   )
