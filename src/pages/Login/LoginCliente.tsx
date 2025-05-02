@@ -1,46 +1,68 @@
 import './style.css'
 
-// assets
-import logo from '../../assets/material/reservationLogo.png';
-import { Link } from 'react-router-dom';
+// componentes
+import Logo from '../../components/Logo/Logo';
+
+// imports
+import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Cliente } from '../../types/Cliente';
 import { AuthService } from '../../services/auth.service';
+import { FormLogin } from '../../types/FormLogin';
+import { useState } from 'react';
 
 const LoginCliente = () => {
 
-  // const { register, handleSubmit } = useForm<Cliente>();
+  const { register, handleSubmit } = useForm<FormLogin>();
 
-  const onSubmitLogin: SubmitHandler<Cliente> = async (dadosCliente: Cliente) => {
+  const [processando, setProcessando] = useState<boolean>(false)
+  const navegar = useNavigate()
+
+  const onSubmitEntrar: SubmitHandler<FormLogin> = async (dadosCliente: FormLogin) => {
+
+    setProcessando(true)
 
     const authService = new AuthService();
     try {
-      const response = await authService.entrarComoCliente(dadosCliente);
-      console.log("Cliente cadastrado com sucesso:", response);
+      await authService.entrarComoCliente(dadosCliente);
+      console.log("Cliente logado com sucesso");
+
+      navegar('/')
     } catch (error) {
-      console.log("Erro ao cadastrar cliente:", error);
+      console.log("Erro ao logar com cliente:", error);
     }
 
+    setProcessando(false)
   };
 
   return (
     <div className='vh-100 area-auth d-flex justify-content-center align-items-center'>
 
       <form className='p-4 bg-white rounded-3 shadow-sm d-flex flex-column gap-3 justify-content-center align-items-center'>
-        <img src={logo} className='text-center' style={{ width: '80px' }} />
+
+        <Logo />
 
         <div>
-          <label className="form-label ms-1">CPF</label>
-          <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="" />
+          <p className='fst-italic weigth-semibold'>Faça login como cliente para prosseguir!</p>
+        </div>
+
+        <div>
+          <label className="form-label ms-1">E-mail</label>
+          <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="" {...register("email", { required: "Nome é obrigatório" })} />
         </div>
 
         <div>
           <label className="form-label ms-1">Senha</label>
-          <input type="password" className="form-control" id="exampleFormControlInput1" placeholder="" />
+          <input type="password" className="form-control" id="exampleFormControlInput1" placeholder="" {...register("senha", { required: "Nome é obrigatório" })} />
         </div>
 
         <div className='d-flex justify-content-between' style={{ width: '100%' }}>
-          <button className='btn-laranja-um px-4'>Entrar</button>
+          <button disabled={processando} onClick={handleSubmit(onSubmitEntrar)} className='btn-laranja-um'>
+            {processando ? (
+              <span className="spinner-border spinner-border-sm mx-3" role="status" aria-hidden="true"></span>
+            ) : (
+              'Entrar'
+            )}
+          </button>
 
           <Link to={'/cadastro-cliente'} className='text-decoration-none btn-outline-laranja py-2 px-3'>Fazer cadastro</Link>
         </div>

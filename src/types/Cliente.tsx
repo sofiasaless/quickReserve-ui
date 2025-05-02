@@ -5,5 +5,5 @@ export type Cliente = {
   senha: string;
   dataAniversario: string;
   cpf: string;
-  criadoEm?: Date;
+  criadoEm?: Date | string;
 }

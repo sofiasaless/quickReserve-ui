@@ -2,21 +2,39 @@ import './style.css';
 import usuarioLogado from '../../assets/material/user.png'
 import restauranteLogado from '../../assets/material/restaurant.png'
 
-import { FunctionComponent } from 'react';
+import { useEffect, useState } from 'react';
 
 // components
 import Logo from '../Logo/Logo';
 
 // imports
 import { Link } from 'react-router-dom';
+import { TipoUsuario } from '../../enum/TipoUsuario';
+import { AuthService } from '../../services/auth.service';
+import { HttpStatusCode } from 'axios';
 
-interface NavbarProps {
-  user?: boolean;
-  onLogout?: () => void;
-  onLogin?: () => void;
-}
+const Navbar = () => {
 
-const Navbar: FunctionComponent<NavbarProps> = () => {
+  const [estadoUsuario, setEstadoUsuario] = useState<HttpStatusCode>(HttpStatusCode.Unauthorized)
+
+  useEffect(() => {
+    const verificarCondicoesUsuario = async () => {
+      let token = localStorage.getItem('token');
+      if (!token) {
+        setEstadoUsuario(HttpStatusCode.Unauthorized)
+        return
+      }
+      
+      // verificando se o token nao expirou
+      const authServ = new AuthService()
+      const resultado = await authServ.verificarEstadoUsuario(TipoUsuario.CLIENTE)
+      setEstadoUsuario(resultado);
+
+    }
+
+    verificarCondicoesUsuario()
+
+  }, [])
 
   return (
     <nav id='navbar-items' className="navbar navbar-expand-lg navbar-light bg-light py-2 sticky-top">
@@ -33,7 +51,20 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
           </div>
 
           <div className='vertical-break rounded-4'></div>
-          <button className='btn-laranja-um px-5'>Entrar</button>
+          {
+            (estadoUsuario === HttpStatusCode.Accepted) ?
+            <Link 
+              to={'/dados-cliente'} 
+              state={{
+                tipo: TipoUsuario.CLIENTE 
+              }}
+            >
+              <img src={usuarioLogado} className='img-logo-usuarios' alt="" />
+            </Link>
+            :
+            <Link to={'/login-cliente'} className='text-decoration-none btn-laranja-um px-5'>Entrar</Link>
+          }
+
           {/* <img src={usuarioLogado} className='img-logo-usuarios' alt="" /> */}
           {/* <img src={restauranteLogado} className='img-logo-usuarios' alt="" /> */}
         </div>
