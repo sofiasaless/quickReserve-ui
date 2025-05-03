@@ -7,3 +7,8 @@
   background-color: #cccccc4d;
   cursor: pointer;
 }
+
+.card-mesa-indisponivel:hover {
+  background-color: white;
+  cursor: not-allowed;
+}

@@ -1,18 +1,41 @@
 // assets
 import imgMesa from '../../assets/material/meeting-room.png'
+import { StatusReserva } from '../../enum/StatusReserva';
+import { ReservaService } from '../../services/reserva.service';
 
 import './style.css'
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 
 interface CardMesaProps {
+  mesaId: number;
   numeroMesa: number;
-  disponibilidade: boolean;
   lugares: number;
+  dataDisponibilidade: string;
 }
 
-const CardMesa:FunctionComponent<CardMesaProps> = ({numeroMesa, disponibilidade, lugares}) => {
+const CardMesa:FunctionComponent<CardMesaProps> = ({mesaId, numeroMesa, lugares, dataDisponibilidade}) => {
+  
+  const [disponibilidade, setDisponibilidade] = useState<boolean>(true);
+
+  const verificarDisponibilidade = async () => {
+    const reservService = new ReservaService();
+    const dadosDeReserva = await reservService.buscarDisponibilidadeDeReservaDaMesa(mesaId, dataDisponibilidade);
+    
+    if (dadosDeReserva.statusReserva) {
+      if (dadosDeReserva.statusReserva != StatusReserva.CANCELADA) {
+        setDisponibilidade(false)
+        return
+      }
+    }
+    setDisponibilidade(true)
+  }
+
+  useEffect(() => {
+    verificarDisponibilidade();
+  }, [dataDisponibilidade])
+  
   return (
-    <div className='card-mesa p-2 rounded-2 d-flex flex-column justify-content-center align-items-center'>
+    <div className={`${(disponibilidade)?'card-mesa':'card-mesa-indisponivel'} p-2 rounded-2 d-flex flex-column justify-content-center align-items-center`} onClick={() => verificarDisponibilidade()}>
       <h4 className='m-0 mb-1'>{numeroMesa}</h4>
       <img src={imgMesa} 
         style={{

@@ -1,5 +1,5 @@
 export type Mesa = {
-  id: number | string,
+  id: number,
   numero: number,
   capacidadePessoas: number,
   restauranteId: number | string

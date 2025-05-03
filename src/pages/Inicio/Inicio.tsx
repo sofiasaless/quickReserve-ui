@@ -22,6 +22,10 @@ const Inicio = () => {
       }
       ).catch((error) => {
         console.error("Erro ao buscar restaurantes:", error);
+
+        // as vezes o erro acontece pelo armazenamento de um token expirado
+        localStorage.removeItem('token')
+        window.location.reload()
       })
     }
 
