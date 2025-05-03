@@ -19,6 +19,7 @@ import { Restaurante } from '../../types/Restaurante'
 import { RestauranteService } from '../../services/restaurante.service'
 import { Mesa } from '../../types/Mesa'
 import { MesaService } from '../../services/mesa.service'
+import { dataAtualJSON, dataJsonParaDataExtensa } from '../../util/dates'
 
 const Reserva = () => {
 
@@ -27,6 +28,8 @@ const Reserva = () => {
   const [restaurante, setRestaurante] = useState<Restaurante>()
 
   const [mesas, setMesas] = useState<Mesa[]>()
+
+  const [dataEscolhida, setDataEscolhida] = useState<string>(dataAtualJSON())
 
   useEffect(() => {
     const recuperarRestaurante = async () => {
@@ -103,13 +106,18 @@ const Reserva = () => {
         <div className='d-flex flex-column gap-3 conteudo'>
           <CardRestauranteInfos
             titulo='Mesas disponíveis'
-            informacao='Disponíveis para 18h'
+            informacao={
+              `Disponíveis para ${dataJsonParaDataExtensa(dataEscolhida)}`
+            }
             icone={imgInfoTemplate4}
           />
 
           <div className='d-flex flex-column gap-1'>
-            <label className='ms-2'>Escolher data e horário</label>
-            <input type="datetime-local" className='btn-outline px-4 py-2' />
+            <label className='ms-2'>Escolher data para reserva</label>
+            <input type="date" className='btn-outline px-4 py-2' onChange={(e) => {
+              console.log('data escolhida ', e.target.value)
+              setDataEscolhida(e.target.value)
+            }}/>
             {/* <button className='btn-outline px-4 py-2'>Escolher data e horário</button> */}
           </div>
 
@@ -121,7 +129,7 @@ const Reserva = () => {
               {
                 mesas?.map((mesa) => (
                   <div key={mesa.id} className="col">
-                    <CardMesa numeroMesa={mesa.numero} lugares={mesa.capacidadePessoas} disponibilidade={true} />
+                    <CardMesa mesaId={mesa.id} numeroMesa={mesa.numero} lugares={mesa.capacidadePessoas} dataDisponibilidade={dataEscolhida}/>
                   </div>
                 ))
               }
@@ -148,7 +156,7 @@ const Reserva = () => {
 
             <div className='d-flex flex-column gap-1'>
               <label className='ms-2'>Nome completo</label>
-              <input type="text" className='input-reserva' />
+              <input type="text" className='input-reserva'/>
             </div>
 
             <div className='d-flex flex-column gap-1'>
@@ -158,7 +166,7 @@ const Reserva = () => {
 
             <div className='d-flex flex-column gap-1'>
               <label className='ms-2'>Observações</label>
-              <textarea rows={3} className='input-reserva' />
+              <textarea rows={3} className='input-reserva' placeholder='Alguma ocasião especial? Aniversário? Comemoração? Jantar romântico?'/>
             </div>
 
           </form>

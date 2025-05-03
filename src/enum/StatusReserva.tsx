@@ -1,0 +1,5 @@
+export enum StatusReserva {
+  PENDENTE = 'PENDENTE',
+  CONFIRMADA = 'CONFIRMADA',
+  CANCELADA = 'CANCELADA'
+}

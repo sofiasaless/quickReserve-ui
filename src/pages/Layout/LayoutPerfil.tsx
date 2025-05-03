@@ -1,16 +1,19 @@
-import Container from "../../components/Container/Container";
+import './style.css'
+
+// componentes
 import NavbarPerfil from "../../components/NavbarPerfil/NavbarPerfil";
+
+// imports
 import { Outlet } from "react-router-dom";
 
 const LayoutPerfil = () => {
   return (
-    <Container>
+    <div className='container section-perfil'>
       <section
         style={{
-          backgroundColor: 'var(--cinza)',
-          height: '100vh',
+          backgroundColor: 'var(--cinza)'
         }}
-        className="d-flex shadow"
+        className="d-flex shadow section-perfil"
       >
         <NavbarPerfil />
 
@@ -19,7 +22,7 @@ const LayoutPerfil = () => {
         </div>
         
       </section>
-    </Container>
+    </div>
   )
 }
 
