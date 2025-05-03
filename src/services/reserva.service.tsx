@@ -14,4 +14,16 @@ export class ReservaService {
       throw error
     })
   }
+
+  public async solicitarReserva(dadosReserva: Reserva) {
+    return api.post<Reserva>(`/reservas/cliente/nova-reserva`, dadosReserva)
+    .then(response => {
+      console.log('reserva solicitada com sucesso ', response.data, response.status)
+      return response.status
+    })
+    .catch(error => {
+      console.log('ocorreu um erro ao solicitar a reserva ', error)
+    })
+  }
+  
 }

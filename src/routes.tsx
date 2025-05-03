@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LayoutPadrao from "./pages/Layout/LayoutPadrao";
 import Inicio from "./pages/Inicio/Inicio";
 import TiposCozinha from "./pages/TiposCozinha/TiposCozinha";
-import Reserva from "./pages/Reserva/Reserva";
+import RealizarReserva from "./pages/RealizarReserva/RealizarReserva";
 import InicioRestaurante from "./pages/InicioRestaurante/InicioRestaurante";
 import Mapeamento from "./pages/Mapeamento/Mapeamento";
 import LayoutPerfil from "./pages/Layout/LayoutPerfil";
@@ -38,7 +38,7 @@ const Rotas = () => {
           <Route
             path="/fazer-reserva/:restauranteId"
             element={
-              <Reserva />
+              <RealizarReserva />
             }
           />
 
