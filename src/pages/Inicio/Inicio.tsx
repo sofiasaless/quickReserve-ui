@@ -19,13 +19,13 @@ const Inicio = () => {
       const resService = new RestauranteService();
       await resService.getRestaurantes().then((res) => {
         setRestaurantes(res)
-      }
-      ).catch((error) => {
-        console.error("Erro ao buscar restaurantes:", error);
+      })
+      .catch(() => {
+        // console.error("Erro ao buscar restaurantes:", error);
 
         // as vezes o erro acontece pelo armazenamento de um token expirado
         localStorage.removeItem('token')
-        window.location.reload()
+        recuperarRestaurantes()
       })
     }
 
