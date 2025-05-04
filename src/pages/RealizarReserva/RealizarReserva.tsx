@@ -20,8 +20,12 @@ import { RestauranteService } from '../../services/restaurante.service'
 import { Mesa } from '../../types/Mesa'
 import { MesaService } from '../../services/mesa.service'
 import { dataAtualJSON, dataJsonParaDataExtensa } from '../../util/dates'
+import { Reserva } from '../../types/Reserva'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { ReservaService } from '../../services/reserva.service'
+import { maiusculaParaRegular } from '../../util/texts'
 
-const Reserva = () => {
+const RealizarReserva = () => {
 
   const { restauranteId } = useParams()
 
@@ -30,6 +34,24 @@ const Reserva = () => {
   const [mesas, setMesas] = useState<Mesa[]>()
 
   const [dataEscolhida, setDataEscolhida] = useState<string>(dataAtualJSON())
+  const [mesaEscolhida, setMesaEscolhida] = useState<Mesa | null>(null)
+
+  // controle de inputs para o form de realizar reserva
+  const { register, handleSubmit } = useForm<Reserva>()
+
+  const onSubmitSolicitarReserva: SubmitHandler<Reserva> = async (dadosReserva: Reserva) => {
+    dadosReserva.dataParaReserva = dataEscolhida
+    dadosReserva.mesaId = mesaEscolhida?.id
+
+    try {
+      const reservaServ = new ReservaService()
+      await reservaServ.solicitarReserva(dadosReserva)
+
+    } catch (error) {
+      console.log('deu erro ao tentar solicitar a reserva ', error)
+    }
+
+  };
 
   useEffect(() => {
     const recuperarRestaurante = async () => {
@@ -45,7 +67,7 @@ const Reserva = () => {
     }
 
     recuperarRestaurante()
-    
+
   }, [restauranteId])
 
   return (
@@ -77,7 +99,7 @@ const Reserva = () => {
             />
             <div className='d-flex flex-column'>
               <span className='text-um weigth-semibold'>{restaurante?.nome}</span>
-              <span className='fst-italic'>{restaurante?.tipoRestaurante?.charAt(0).concat(restaurante?.tipoRestaurante?.toLowerCase().slice(1))}</span>
+              <span className='fst-italic'>{maiusculaParaRegular(restaurante?.tipoRestaurante)}</span>
             </div>
           </div>
 
@@ -115,9 +137,8 @@ const Reserva = () => {
           <div className='d-flex flex-column gap-1'>
             <label className='ms-2'>Escolher data para reserva</label>
             <input type="date" className='btn-outline px-4 py-2' onChange={(e) => {
-              console.log('data escolhida ', e.target.value)
               setDataEscolhida(e.target.value)
-            }}/>
+            }} />
             {/* <button className='btn-outline px-4 py-2'>Escolher data e horário</button> */}
           </div>
 
@@ -129,7 +150,11 @@ const Reserva = () => {
               {
                 mesas?.map((mesa) => (
                   <div key={mesa.id} className="col">
-                    <CardMesa mesaId={mesa.id} numeroMesa={mesa.numero} lugares={mesa.capacidadePessoas} dataDisponibilidade={dataEscolhida}/>
+                    <CardMesa
+                      mesaObj={mesa}
+                      dataDisponibilidade={dataEscolhida}
+                      escolherMesa={(mesa) => setMesaEscolhida(mesa)}
+                    />
                   </div>
                 ))
               }
@@ -137,47 +162,54 @@ const Reserva = () => {
             </div>
           </div>
 
-          <div>
-            <span className='text-um text-uppercase fst-italic'>Mesa de n° <strong>10</strong> selecionada</span>
+          <div
+            className='flex-column gap-3'
+            style={{
+              display: (mesaEscolhida) ? 'flex' : 'none'
+            }}
+          >
+            <div>
+              <span className='text-um text-uppercase fst-italic'>Mesa de n° <strong>{mesaEscolhida?.numero}</strong> selecionada</span>
 
-            <div className='d-flex gap-2 align-items-center'>
-              <img
-                src={imgIconeInfo} alt=""
-                style={{
-                  width: '25px',
-                  objectFit: 'cover'
-                }}
-              />
-              <span>Reserva para 08 de fevereiro de 2025, quinta-feira</span>
-            </div>
-          </div>
-
-          <form className='d-flex flex-column gap-3'>
-
-            <div className='d-flex flex-column gap-1'>
-              <label className='ms-2'>Nome completo</label>
-              <input type="text" className='input-reserva'/>
-            </div>
-
-            <div className='d-flex flex-column gap-1'>
-              <label className='ms-2'>N° de pessoas</label>
-              <input type="number" className='input-reserva' />
+              <div className='d-flex gap-2 align-items-center'>
+                <img
+                  src={imgIconeInfo} alt=""
+                  style={{
+                    width: '25px',
+                    objectFit: 'cover'
+                  }}
+                />
+                <span>Reserva para {dataJsonParaDataExtensa(dataEscolhida)}</span>
+              </div>
             </div>
 
-            <div className='d-flex flex-column gap-1'>
-              <label className='ms-2'>Observações</label>
-              <textarea rows={3} className='input-reserva' placeholder='Alguma ocasião especial? Aniversário? Comemoração? Jantar romântico?'/>
+            <form className='d-flex flex-column gap-3'>
+
+              <div className='d-flex flex-column gap-1'>
+                <label className='ms-2'>Nome completo</label>
+                <input type="text" className='input-reserva' {...register("nomeParaReserva")}/>
+              </div>
+
+              <div className='d-flex flex-column gap-1'>
+                <label className='ms-2'>N° de pessoas</label>
+                <input type="number" className='input-reserva' {...register("quantidadePessoas", { valueAsNumber: true })} />
+              </div>
+
+              <div className='d-flex flex-column gap-1'>
+                <label className='ms-2'>Observações</label>
+                <textarea rows={3} className='input-reserva' placeholder='Alguma ocasião especial? Aniversário? Comemoração? Jantar romântico?' {...register("observacoes")} />
+              </div>
+
+            </form>
+
+            <div className='d-flex justify-content-end mt-3'>
+              <button className='w-full btn-laranja-dois' onClick={handleSubmit(onSubmitSolicitarReserva)}>Solicitar reserva</button>
             </div>
-
-          </form>
-
-          <div className='d-flex justify-content-end mt-3'>
-            <button className='w-full btn-laranja-dois'>Solicitar reserva</button>
           </div>
         </div>
       </section>
 
-      <ModalAlerta 
+      <ModalAlerta
         titulo='Reserva solicitada!'
         informacao='Acompanhe o andamento da sua reserva na seção “Minhas reservas” disponível no seu perfil.'
       />
@@ -186,4 +218,4 @@ const Reserva = () => {
   )
 }
 
-export default Reserva;
+export default RealizarReserva;

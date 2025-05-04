@@ -3,7 +3,7 @@ import api from "./api";
 
 export class RestauranteService {
 
-  constructor () {}
+  constructor() { }
 
   public async getRestaurantes() {
     return await api.get<Restaurante[]>(`/restaurante/`).then(response => {
@@ -33,6 +33,17 @@ export class RestauranteService {
       console.error("Erro ao buscar restaurantes:", error);
       throw error;
     });
+  }
+
+  public async getRestaurantePorMesaId(mesaId: number) {
+    return api.get<Restaurante>(`/restaurante/encontrar?mesaId=${mesaId}`)
+    .then(response => {
+      return response.data
+    })
+    .catch(error => {
+      console.log('ocorreu um erro ao buscar o restaurante ', error)
+      throw error
+    })
   }
 
 }

@@ -1,6 +1,33 @@
+import { useEffect, useState } from "react"
 import CardReservaCliente from "../../components/CardReservaCliente/CardReservaCliente"
+import { StatusReserva } from "../../enum/StatusReserva"
+import { ReservaService } from "../../services/reserva.service"
+import { Reserva } from "../../types/Reserva"
 
 const ReservasCliente = () => {
+
+  const [reservasPendentes, setReservasPendentes] = useState<Reserva[]>()
+  const [reservasConfirmadas, setReservasConfirmadas] = useState<Reserva[]>()
+  const [reservasCanceladas, setReservasCanceladas] = useState<Reserva[]>()
+
+  const reservServ = new ReservaService()
+
+  useEffect(() => {
+
+    const buscar = async () => {
+      const pendentes = await reservServ.getReservasClientePorStatus(StatusReserva.PENDENTE)
+      setReservasPendentes(pendentes);
+
+      const confirmadas = await reservServ.getReservasClientePorStatus(StatusReserva.CONFIRMADA)
+      setReservasConfirmadas(confirmadas);
+
+      const canceladas = await reservServ.getReservasClientePorStatus(StatusReserva.CANCELADA)
+      setReservasCanceladas(canceladas);
+    }
+
+    buscar()
+  }, [])
+
   return (
     <div className="d-flex flex-column gap-4">
       <div className="d-flex flex-column">
@@ -19,18 +46,15 @@ const ReservasCliente = () => {
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-          <div className="col">
-            <CardReservaCliente />
-          </div>
-          <div className="col">
-            <CardReservaCliente />
-          </div>
-          <div className="col">
-            <CardReservaCliente />
-          </div>
-          <div className="col">
-            <CardReservaCliente />
-          </div>
+
+          {
+            reservasPendentes?.map((reserva) => (
+              <div key={reserva.id} className="col">
+                <CardReservaCliente reservaObj={reserva} />
+              </div>
+            ))
+          }
+
         </div>
       </div>
 
@@ -47,18 +71,13 @@ const ReservasCliente = () => {
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-          <div className="col">
-            <CardReservaCliente />
-          </div>
-          <div className="col">
-            <CardReservaCliente />
-          </div>
-          <div className="col">
-            <CardReservaCliente />
-          </div>
-          <div className="col">
-            <CardReservaCliente />
-          </div>
+          {
+            reservasConfirmadas?.map((reserva) => (
+              <div key={reserva.id} className="col">
+                <CardReservaCliente reservaObj={reserva} />
+              </div>
+            ))
+          }
         </div>
       </div>
 
@@ -75,18 +94,13 @@ const ReservasCliente = () => {
 
       <div className="container">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-          <div className="col">
-            <CardReservaCliente />
-          </div>
-          <div className="col">
-            <CardReservaCliente />
-          </div>
-          <div className="col">
-            <CardReservaCliente />
-          </div>
-          <div className="col">
-            <CardReservaCliente />
-          </div>
+          {
+            reservasCanceladas?.map((reserva) => (
+              <div key={reserva.id} className="col">
+                <CardReservaCliente reservaObj={reserva} />
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>

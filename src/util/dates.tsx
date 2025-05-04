@@ -12,6 +12,9 @@ export function dataAtualJSON(): string {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-export function dataJsonParaDataExtensa(jsonDate: string): string {
-  return dataJsonParaDataObjeto(jsonDate).toLocaleDateString('pt-BR', { dateStyle: 'full' });
+export function dataJsonParaDataExtensa(jsonDate: string | null): string {
+  if (jsonDate) {
+    return dataJsonParaDataObjeto(jsonDate).toLocaleDateString('pt-BR', { dateStyle: 'full' });
+  }
+  return ''
 }
