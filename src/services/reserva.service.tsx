@@ -1,3 +1,4 @@
+import { StatusReserva } from "../enum/StatusReserva";
 import { Reserva } from "../types/Reserva";
 import api from "./api";
 
@@ -23,6 +24,17 @@ export class ReservaService {
     })
     .catch(error => {
       console.log('ocorreu um erro ao solicitar a reserva ', error)
+    })
+  }
+
+  public async getReservasClientePorStatus(statusReserva: StatusReserva) {
+    return api.get<Reserva[]>(`/reservas/cliente/listar?status=${statusReserva}`)
+    .then(response => {
+      return response.data
+    })
+    .catch(error => {
+      console.log('nao foi possivel recuperar as reversas do cliente ', error)
+      throw error
     })
   }
   

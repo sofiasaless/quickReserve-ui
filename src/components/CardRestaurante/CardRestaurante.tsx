@@ -2,6 +2,7 @@ import './style.css'
 
 import { FunctionComponent } from "react";
 import { Link } from 'react-router-dom';
+import { maiusculaParaRegular } from '../../util/texts';
 
 interface CardRestauranteProps {
   idRestaurante: number | undefined;
@@ -24,7 +25,7 @@ const CardRestaurante: FunctionComponent<CardRestauranteProps> = ({ idRestaurant
           <img src={icone} className='img-logo-card rounded-circle' alt="" />
           <div className="d-flex flex-column">
             <span className='fw-bold lh-1'>{nome}</span>
-            <span>{tipo?.charAt(0).concat(tipo?.toLowerCase().slice(1))}</span>
+            <span>{maiusculaParaRegular(tipo)}</span>
           </div>
         </div>
 

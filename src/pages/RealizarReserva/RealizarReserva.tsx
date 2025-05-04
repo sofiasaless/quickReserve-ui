@@ -23,6 +23,7 @@ import { dataAtualJSON, dataJsonParaDataExtensa } from '../../util/dates'
 import { Reserva } from '../../types/Reserva'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ReservaService } from '../../services/reserva.service'
+import { maiusculaParaRegular } from '../../util/texts'
 
 const RealizarReserva = () => {
 
@@ -98,7 +99,7 @@ const RealizarReserva = () => {
             />
             <div className='d-flex flex-column'>
               <span className='text-um weigth-semibold'>{restaurante?.nome}</span>
-              <span className='fst-italic'>{restaurante?.tipoRestaurante?.charAt(0).concat(restaurante?.tipoRestaurante?.toLowerCase().slice(1))}</span>
+              <span className='fst-italic'>{maiusculaParaRegular(restaurante?.tipoRestaurante)}</span>
             </div>
           </div>
 

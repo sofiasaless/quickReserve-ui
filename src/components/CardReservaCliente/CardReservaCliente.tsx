@@ -1,27 +1,54 @@
-import iconeTemplate from '../../assets/material/imageIconeTemplate.png'
 import iconePessoas from '../../assets/material/multiple-users-silhouette.png'
 
-const CardReservaCliente = () => {
+// imports
+import { FunctionComponent, useEffect, useState } from 'react';
+import { Reserva } from '../../types/Reserva';
+import { dataJsonParaDataExtensa } from '../../util/dates';
+import { Restaurante } from '../../types/Restaurante';
+import { RestauranteService } from '../../services/restaurante.service';
+import { maiusculaParaRegular } from '../../util/texts';
+
+interface CardReservaClienteProps {
+  reservaObj: Reserva
+}
+
+const CardReservaCliente: FunctionComponent<CardReservaClienteProps> = ({ reservaObj }) => {
+
+  const [dadosRestaurante, setDadosRestaurante] = useState<Restaurante>()
+
+  useEffect(() => {
+    const buscarRestaurante = async () => {
+      if (reservaObj.mesaId) {
+        const restServ = new RestauranteService()
+        const dados = await restServ.getRestaurantePorMesaId(reservaObj.mesaId)
+        setDadosRestaurante(dados)
+      }
+    }
+
+    buscarRestaurante()
+
+  }, [reservaObj.mesaId])
+
   return (
     <div className="d-flex flex-column bg-white rounded-3 shadow-sm p-3">
 
       <div className="d-flex flex-column text-center justify-content-center align-items-center">
         <img
-          src={iconeTemplate} alt=""
+          src={dadosRestaurante?.imagemPerfil} alt=""
           style={{
             width: '50px',
             height: '50px',
           }}
           className='rounded-circle'
         />
-        <span>Forno e Brasa</span>
-        <span className="text-zero fst-italic">Pizzaria</span>
+        <span>{dadosRestaurante?.nome}</span>
+        <span className="text-zero fst-italic">{maiusculaParaRegular(dadosRestaurante?.tipoRestaurante)}</span>
       </div>
 
       <hr />
 
       <div className="d-flex flex-column text-center justify-content-center align-items-center">
-        <span className='text-zero fst-italic'>Reserva para quinta-feira, 04 de março de 2025</span>
+        <span className='text-zero fst-italic'>Reserva para {dataJsonParaDataExtensa(reservaObj.dataParaReserva)}</span>
 
         <div className='d-flex flex-row justify-content-center align-items-center gap-2 mt-2'>
           <img
@@ -31,7 +58,7 @@ const CardReservaCliente = () => {
               height: '25px',
             }}
           />
-          <span className='text-zero'>4 pessoas</span>
+          <span className='text-zero'>Para {reservaObj.quantidadePessoas} pessoas</span>
         </div>
       </div>
 
