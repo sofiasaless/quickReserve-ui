@@ -58,20 +58,6 @@ const Rotas = () => {
                 <ReservasCliente />
               }
             />
-
-            <Route
-              path="/dados-restaurante"
-              element={
-                <DadosRestaurante />
-              }
-            />
-
-            <Route
-              path="/minhas-mesas"
-              element={
-                <GerenciaMesas />
-              }
-            />
           </Route>
         </Route>
 
@@ -90,6 +76,22 @@ const Rotas = () => {
               <Mapeamento />
             }
           />
+
+          <Route element={<LayoutPerfil />}>
+            <Route
+              path="/dados-restaurante"
+              element={
+                <DadosRestaurante />
+              }
+            />
+
+            <Route
+              path="/minhas-mesas"
+              element={
+                <GerenciaMesas />
+              }
+            />
+          </Route>
         </Route>
 
         <Route

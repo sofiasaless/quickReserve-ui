@@ -18,3 +18,10 @@ export function dataJsonParaDataExtensa(jsonDate: string | null): string {
   }
   return ''
 }
+
+export function dataApiParaDataExtensa(dataAPI: string | Date | undefined): string {
+  if (typeof dataAPI === 'string') {
+    return new Date(dataAPI).toLocaleDateString('pt-BR', { dateStyle: 'full' });
+  }
+  return ''
+}

@@ -10,5 +10,5 @@ export type Restaurante = {
   senha: string;
   imagemPerfil?: string;
   imagemCapa?: string;
-  dataCadastro?: Date;
+  criadoEm?: Date | string;
 }
