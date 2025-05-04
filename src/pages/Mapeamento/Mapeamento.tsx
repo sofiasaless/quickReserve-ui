@@ -57,7 +57,7 @@ const Mapeamento = () => {
 
         <div className="container py-4">
           <div className="row row-cols-1 row-cols-sm-3 row-cols-md-5 g-4">
-            <div className="col">
+            {/* <div className="col">
               <CardMesa numeroMesa={10} disponibilidade={true} lugares={4} />
             </div>
             <div className="col">
@@ -74,7 +74,7 @@ const Mapeamento = () => {
             </div>
             <div className="col">
               <CardMesa numeroMesa={10} disponibilidade={true} lugares={4} />
-            </div>
+            </div> */}
           </div>
         </div>
 

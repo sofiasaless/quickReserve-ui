@@ -82,7 +82,7 @@ const InicioRestaurante = () => {
 
         {/* <ModalAcao titulo='Detalhes da reserva'/> */}
 
-        <ModalAlertaAcao titulo='Cancelar reserva' informacao='Tem certeza que deseja cancelar sua reserva? Você terá que solicitá-la novamente se quiser voltar a reservar.' />
+        {/* <ModalAlertaAcao titulo='Cancelar reserva' informacao='Tem certeza que deseja cancelar sua reserva? Você terá que solicitá-la novamente se quiser voltar a reservar.' /> */}
 
       </Container >
     </>

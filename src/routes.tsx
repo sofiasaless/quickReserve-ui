@@ -14,6 +14,7 @@ import CadastroCliente from "./pages/Cadastro/CadastroCliente";
 import LoginCliente from "./pages/Login/LoginCliente";
 import LoginRestaurante from "./pages/Login/LoginRestaurante";
 import CadastroRestaurante from "./pages/Cadastro/CadastroRestaurante";
+import LayoutUsuarioRestuarante from "./pages/Layout/LayoutUsuarioRestuarante";
 
 const Rotas = () => {
   return (
@@ -39,21 +40,6 @@ const Rotas = () => {
             path="/fazer-reserva/:restauranteId"
             element={
               <RealizarReserva />
-            }
-          />
-
-          {/* rotas do restaurante */}
-          <Route
-            path="/inicio-restaurante"
-            element={
-              <InicioRestaurante />
-            }
-          />
-
-          <Route
-            path="/mapeamento"
-            element={
-              <Mapeamento />
             }
           />
 
@@ -87,6 +73,23 @@ const Rotas = () => {
               }
             />
           </Route>
+        </Route>
+
+        <Route element={<LayoutUsuarioRestuarante />}>
+          {/* rotas do restaurante */}
+          <Route
+            path="/inicio-restaurante"
+            element={
+              <InicioRestaurante />
+            }
+          />
+
+          <Route
+            path="/mapeamento"
+            element={
+              <Mapeamento />
+            }
+          />
         </Route>
 
         <Route
