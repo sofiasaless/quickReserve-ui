@@ -4,7 +4,6 @@ import { FunctionComponent } from "react";
 // assets
 import imgReservaTemplate from '../../assets/material/not-reserved.png'
 import imgSolicitado from '../../assets/material/siluete.png'
-import imgHorario from '../../assets/material/alarm-clock.png'
 import imgPessoas from '../../assets/material/multiple-users-silhouette.png'
 
 interface CardReservaProps {
@@ -12,7 +11,7 @@ interface CardReservaProps {
 
 const CardReserva: FunctionComponent<CardReservaProps> = () => {
   return (
-    <div className="card rounded-4 card-reserva text-white border-0 p-3 d-flex flex-column justify-content-center gap-3">
+    <div className="card rounded-4 card-reserva text-white border-0 p-3 d-flex flex-column justify-content-center gap-3 shadow-sm">
         <div className='d-flex align-items-center justify-content-between gap-3'>
           <img src={imgReservaTemplate} 
             alt="" 
@@ -39,17 +38,6 @@ const CardReserva: FunctionComponent<CardReservaProps> = () => {
               }
             />
             <span className='text-zero text-black'>Solicitada por Sofia</span>
-          </div>
-
-          <div className='d-flex gap-1 align-items-center'>
-            <img src={imgHorario} alt="" 
-              style={
-                {
-                  height: '25px',
-                }
-              }
-            />
-            <span className='text-zero text-black'>Para 18:00h</span>
           </div>
 
           <div className='d-flex gap-1 align-items-center'>

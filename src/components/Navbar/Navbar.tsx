@@ -1,6 +1,5 @@
 import './style.css';
 import usuarioLogado from '../../assets/material/user.png'
-import restauranteLogado from '../../assets/material/restaurant.png'
 
 import { useEffect, useState } from 'react';
 

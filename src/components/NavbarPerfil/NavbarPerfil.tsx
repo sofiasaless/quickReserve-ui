@@ -33,9 +33,7 @@ const NavbarPerfil = () => {
 
       // verificando se o token nao expirou
       const authServ = new AuthService()
-      const resultado = await authServ.verificarEstadoUsuario(TipoUsuario.CLIENTE)
-
-      if (resultado === HttpStatusCode.Unauthorized) {
+      if (await authServ.verificarEstadoUsuario(tipoUsuario) === HttpStatusCode.Unauthorized) {
         window.confirm('Você não está logado!')
         navegar('/')
       }
@@ -90,9 +88,14 @@ const NavbarPerfil = () => {
                   height: '25px'
                 }}
               />
-              <a href="#" className="nav-link link-light" aria-current="page">
-                Meus dados
-              </a>
+              <Link to={'/dados-restaurante'}
+                state={{
+                  tipo: TipoUsuario.RESTAURANTE
+                }}
+                className="nav-link link-light" aria-current="page"
+              >
+                Meu restaurante
+              </Link>
             </li>
 
             <li className="nav-item d-flex align-items-center">
@@ -102,9 +105,14 @@ const NavbarPerfil = () => {
                   height: '25px'
                 }}
               />
-              <a href="#" className="nav-link link-light" aria-current="page">
+              <Link to={'/minhas-mesas'}
+                state={{
+                  tipo: TipoUsuario.RESTAURANTE
+                }}
+                className="nav-link link-light" aria-current="page"  
+              >
                 Minhas mesas
-              </a>
+              </Link>
             </li>
           </ul>
       }
